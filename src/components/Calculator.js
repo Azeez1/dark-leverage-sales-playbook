@@ -15,15 +15,15 @@ export default function Calculator() {
     <div className="p-4 bg-white rounded shadow-md mt-4">
       <h2 className="text-xl font-semibold mb-2">Broker Income Calculator</h2>
       <div className="space-y-2">
-        <label className="block">
+        <label className="block" title="How many businesses you attempt to sell each year">
           Deals per year: {annualDeals}
           <input type="range" min="10" max="50" value={annualDeals} onChange={e => setAnnualDeals(parseInt(e.target.value, 10))} className="w-full" />
         </label>
-        <label className="block">
+        <label className="block" title="Typical sale price for your deals">
           Average deal size ($):
           <input type="number" value={averageDealSize} onChange={e => setAverageDealSize(parseInt(e.target.value, 10))} className="w-full border" />
         </label>
-        <label className="block">
+        <label className="block" title="Percentage of deals that successfully close">
           Success rate: {Math.round(successRate*100)}%
           <input type="range" min="0.2" max="0.7" step="0.01" value={successRate} onChange={e => setSuccessRate(parseFloat(e.target.value))} className="w-full" />
         </label>
