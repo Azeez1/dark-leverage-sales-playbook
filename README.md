@@ -4,7 +4,7 @@ This repository contains a very small prototype for the interactive sales playbo
 
 ## Getting Started
 
-Install dependencies and start a simple server:
+Install dependencies and start a simple server. The `npm start` command will bundle the React code with [esbuild](https://esbuild.github.io/) and then serve the `public` directory:
 
 ```bash
 npm start
