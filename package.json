@@ -1,0 +1,9 @@
+{
+  "name": "dark-leverage-sales-playbook",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "npx serve public"
+  },
+  "dependencies": {}
+}
