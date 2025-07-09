@@ -537,11 +537,13 @@
             animation: slideIn 0.3s ease-out;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(-20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-    </style>
+    @keyframes slideIn {
+        from { transform: translateX(-20px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -549,6 +551,7 @@
         <div class="header-content">
             <div class="logo">D.A.R.K. Leverage Model™</div>
             <div class="header-controls">
+                <select id="versionSelect" class="export-btn" onchange="switchVersion(this.value)"></select>
                 <button class="export-btn" onclick="exportToPDF()" title="Export to PDF">
                     📄 Export PDF
                 </button>
@@ -1995,60 +1998,58 @@
                         </tbody>
                     </table>
 
-                    <h3 class="editable">Interactive Certification Quiz</h3>
+                    <h3 class="editable">Certification Quiz</h3>
                     <div class="quiz-container">
                         <div class="quiz-question">
                             <h4>1. What are the 4 pillars of D.A.R.K.?</h4>
                             <ul class="quiz-options">
-                                <li class="quiz-option" onclick="selectOption(this, false)">a) Data, Analytics, Revenue, Knowledge</li>
-                                <li class="quiz-option" onclick="selectOption(this, true)">b) Data Moat, Automation Engine, Recurring Value, Kapital Deployment</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">c) Design, Automate, Replicate, Keep</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">d) Diagnose, Analyze, Repair, Kickoff</li>
+                                <li class="quiz-option">a) Data, Analytics, Revenue, Knowledge</li>
+                                <li class="quiz-option">b) Data Moat, Automation Engine, Recurring Value, Kapital Deployment</li>
+                                <li class="quiz-option">c) Design, Automate, Replicate, Keep</li>
+                                <li class="quiz-option">d) Diagnose, Analyze, Repair, Kickoff</li>
                             </ul>
                         </div>
 
                         <div class="quiz-question">
                             <h4>2. What's the typical ROI timeframe?</h4>
                             <ul class="quiz-options">
-                                <li class="quiz-option" onclick="selectOption(this, false)">a) 6 months</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">b) 1 year</li>
-                                <li class="quiz-option" onclick="selectOption(this, true)">c) 3.5 weeks</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">d) 90 days</li>
+                                <li class="quiz-option">a) 6 months</li>
+                                <li class="quiz-option">b) 1 year</li>
+                                <li class="quiz-option">c) 3.5 weeks</li>
+                                <li class="quiz-option">d) 90 days</li>
                             </ul>
                         </div>
 
                         <div class="quiz-question">
                             <h4>3. Which Value Builder score indicates immediate sprint priority?</h4>
                             <ul class="quiz-options">
-                                <li class="quiz-option" onclick="selectOption(this, false)">a) 75-100</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">b) 50-74</li>
-                                <li class="quiz-option" onclick="selectOption(this, true)">c) Below 50</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">d) All scores equally</li>
+                                <li class="quiz-option">a) 75-100</li>
+                                <li class="quiz-option">b) 50-74</li>
+                                <li class="quiz-option">c) Below 50</li>
+                                <li class="quiz-option">d) All scores equally</li>
                             </ul>
                         </div>
 
                         <div class="quiz-question">
                             <h4>4. What's the average margin improvement?</h4>
                             <ul class="quiz-options">
-                                <li class="quiz-option" onclick="selectOption(this, false)">a) 5-10%</li>
-                                <li class="quiz-option" onclick="selectOption(this, true)">b) 10-15 points</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">c) 20-30 points</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">d) 2-3%</li>
+                                <li class="quiz-option">a) 5-10%</li>
+                                <li class="quiz-option">b) 10-15 points</li>
+                                <li class="quiz-option">c) 20-30 points</li>
+                                <li class="quiz-option">d) 2-3%</li>
                             </ul>
                         </div>
 
                         <div class="quiz-question">
                             <h4>5. How many specialists typically comprise a pod?</h4>
                             <ul class="quiz-options">
-                                <li class="quiz-option" onclick="selectOption(this, false)">a) 1-2</li>
-                                <li class="quiz-option" onclick="selectOption(this, true)">b) 3-5</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">c) 6-8</li>
-                                <li class="quiz-option" onclick="selectOption(this, false)">d) 10+</li>
+                                <li class="quiz-option">a) 1-2</li>
+                                <li class="quiz-option">b) 3-5</li>
+                                <li class="quiz-option">c) 6-8</li>
+                                <li class="quiz-option">d) 10+</li>
                             </ul>
                         </div>
 
-                        <button onclick="submitQuiz()" style="background: var(--highlight-color); color: var(--text-primary); border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit Quiz</button>
-                        <div id="quiz-results" style="margin-top: 1rem; display: none;"></div>
                     </div>
 
                     <h3 class="editable">FAQ Quick-Fire</h3>
@@ -2123,10 +2124,39 @@
     <script>
         // Global variables
         let editMode = false;
-        let quizAnswers = {};
+        let currentVersion = 'v1';
+
+        function initVersions() {
+            const versions = JSON.parse(localStorage.getItem('playbook_versions')) || { v1: document.querySelector('.main-content').innerHTML };
+            if (!versions.v2) {
+                versions.v2 = versions.v1;
+            }
+            localStorage.setItem('playbook_versions', JSON.stringify(versions));
+
+            const select = document.getElementById('versionSelect');
+            Object.keys(versions).forEach(v => {
+                const option = document.createElement('option');
+                option.value = v;
+                option.textContent = v.toUpperCase();
+                select.appendChild(option);
+            });
+
+            currentVersion = localStorage.getItem('current_version') || 'v1';
+            select.value = currentVersion;
+        }
+
+        function switchVersion(version) {
+            const versions = JSON.parse(localStorage.getItem('playbook_versions')) || {};
+            if (versions[version]) {
+                document.querySelector('.main-content').innerHTML = versions[version];
+                currentVersion = version;
+                localStorage.setItem('current_version', version);
+            }
+        }
 
         // Initialize the ebook
         document.addEventListener('DOMContentLoaded', function() {
+            initVersions();
             initializeNavigation();
             initializeTooltips();
             initializeSmoothScrolling();
@@ -2291,73 +2321,6 @@
             }, 2000);
         }
 
-        // Quiz Functions
-        function selectOption(option, isCorrect) {
-            const question = option.closest('.quiz-question');
-            const options = question.querySelectorAll('.quiz-option');
-            
-            // Remove previous selections
-            options.forEach(opt => opt.classList.remove('selected'));
-            
-            // Select current option
-            option.classList.add('selected');
-            
-            // Store answer
-            const questionNumber = Array.from(document.querySelectorAll('.quiz-question')).indexOf(question) + 1;
-            quizAnswers[questionNumber] = {
-                selected: option.textContent,
-                correct: isCorrect
-            };
-        }
-
-        function submitQuiz() {
-            const totalQuestions = document.querySelectorAll('.quiz-question').length;
-            const answeredQuestions = Object.keys(quizAnswers).length;
-            
-            if (answeredQuestions < totalQuestions) {
-                alert(`Please answer all ${totalQuestions} questions before submitting.`);
-                return;
-            }
-            
-            let correctAnswers = 0;
-            Object.values(quizAnswers).forEach(answer => {
-                if (answer.correct) correctAnswers++;
-            });
-            
-            const score = Math.round((correctAnswers / totalQuestions) * 100);
-            const passed = score >= 80;
-            
-            // Show results
-            const resultsDiv = document.getElementById('quiz-results');
-            resultsDiv.style.display = 'block';
-            resultsDiv.innerHTML = `
-                <h4 style="color: ${passed ? 'var(--success-color)' : 'var(--error-color)'}">
-                    Quiz Results: ${score}% (${correctAnswers}/${totalQuestions})
-                </h4>
-                <p>${passed ? 
-                    '🎉 Congratulations! You passed the D.A.R.K. certification quiz.' : 
-                    '📚 Please review the material and retake the quiz. You need 80% to pass.'
-                }</p>
-            `;
-            
-            // Highlight correct/incorrect answers
-            document.querySelectorAll('.quiz-question').forEach((question, index) => {
-                const questionNumber = index + 1;
-                const answer = quizAnswers[questionNumber];
-                const selectedOption = question.querySelector('.quiz-option.selected');
-                
-                if (selectedOption) {
-                    if (answer.correct) {
-                        selectedOption.classList.add('correct');
-                    } else {
-                        selectedOption.classList.add('incorrect');
-                    }
-                }
-            });
-            
-            // Scroll to results
-            resultsDiv.scrollIntoView({ behavior: 'smooth' });
-        }
 
         // Search Function
         function searchContent() {
@@ -2487,15 +2450,6 @@
             window.print();
         }
 
-        // Export Functions (for future enhancement)
-        function exportToPDF() {
-            alert('PDF export functionality would be implemented here');
-        }
-
-        function exportToWord() {
-            alert('Word export functionality would be implemented here');
-        }
-
         // Analytics (placeholder for tracking user interactions)
         function trackEvent(eventName, eventData) {
             console.log('Event tracked:', eventName, eventData);
@@ -2512,84 +2466,20 @@
             trackEvent('quiz_completion', { score: score });
         }
 
-        // Auto-save functionality for edit mode
-        let autoSaveTimer;
-        function scheduleAutoSave() {
-            clearTimeout(autoSaveTimer);
-            autoSaveTimer = setTimeout(() => {
-                if (editMode) {
-                    saveAllEditableContent();
-                }
-            }, 5000); // Auto-save every 5 seconds
-        }
 
-        function saveAllEditableContent() {
-            const editableElements = document.querySelectorAll('.editable[contenteditable="true"]');
-            const content = {};
-            
-            editableElements.forEach((element, index) => {
-                content[`element_${index}`] = element.innerHTML;
-            });
-            
-            // In production, this would save to localStorage or server
-            localStorage.setItem('dark_ebook_content', JSON.stringify(content));
-            console.log('Auto-saved content');
-        }
-
-        function loadSavedContent() {
-            const savedContent = localStorage.getItem('dark_ebook_content');
-            if (savedContent) {
-                const content = JSON.parse(savedContent);
-                const editableElements = document.querySelectorAll('.editable');
-                
-                editableElements.forEach((element, index) => {
-                    if (content[`element_${index}`]) {
-                        element.innerHTML = content[`element_${index}`];
-                    }
-                });
-            }
-        }
-
-         // Initialize auto-save when edit mode is enabled
-        document.addEventListener('input', function(event) {
-            if (editMode && event.target.classList.contains('editable')) {
-                scheduleAutoSave();
-            }
-        });
-        // Load saved content on page load
-        window.addEventListener('load', loadSavedContent);
 
         // Export Functions
         function exportToPDF() {
-            // Create a clean version of the content for export
-            const content = getCleanContent();
-            const printWindow = window.open('', '_blank');
-            printWindow.document.write(`
-                <!DOCTYPE html>
-                <html>
-                <head>
-                    <title>D.A.R.K. Leverage Model™ Sales Ebook</title>
-                    <style>
-                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px; }
-                        h1, h2, h3 { color: #2c3e50; }
-                        h1 { border-bottom: 3px solid #e94560; padding-bottom: 10px; }
-                        h2 { border-bottom: 2px solid #16213e; padding-bottom: 8px; margin-top: 30px; }
-                        h3 { color: #e94560; margin-top: 25px; }
-                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-                        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
-                        th { background-color: #f8f9fa; font-weight: bold; }
-                        .key-takeaway { background: #f8f9fa; padding: 15px; border-left: 4px solid #e94560; margin: 20px 0; }
-                        .coach-tip { background: #e8f4fd; padding: 15px; border-left: 4px solid #0f3460; margin: 20px 0; }
-                        @media print { body { margin: 20px; } }
-                    </style>
-                </head>
-                <body>${content}</body>
-                </html>
-            `);
-            printWindow.document.close();
-            setTimeout(() => {
-                printWindow.print();
-            }, 500);
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'pt', 'a4');
+            doc.html(document.querySelector('.main-content'), {
+                callback: function (pdf) {
+                    pdf.save('DARK_Sales_Ebook.pdf');
+                },
+                margin: [40, 20, 40, 20],
+                autoPaging: 'text',
+                html2canvas: { scale: 0.57 }
+            });
         }
 
         function exportToWord() {
@@ -2694,15 +2584,13 @@
                 });
             }
             
-            // Auto-save the new content
-            scheduleAutoSave();
+            // Content added
         }
 
         function removeSubsection(subsectionId) {
             if (confirm('Are you sure you want to remove this subsection?')) {
                 const subsection = document.getElementById(subsectionId);
                 subsection.remove();
-                scheduleAutoSave();
             }
         }
 
