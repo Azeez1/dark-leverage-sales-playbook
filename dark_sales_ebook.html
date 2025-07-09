@@ -1,0 +1,2725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D.A.R.K. Leverage Model™ - Complete Sales Ebook</title>
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --highlight-color: #e94560;
+            --text-primary: #ffffff;
+            --text-secondary: #b8b8b8;
+            --text-muted: #888888;
+            --background-dark: #0a0a0a;
+            --background-card: #1e1e1e;
+            --border-color: #333333;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --error-color: #f44336;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--background-dark) 0%, var(--primary-color) 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--highlight-color);
+        }
+
+        .export-btn {
+            background: var(--background-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .export-btn:hover {
+            background: var(--border-color);
+            transform: translateY(-2px);
+        }
+
+        .edit-mode-toggle {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .edit-mode-toggle:hover {
+            background: var(--highlight-color);
+            transform: translateY(-2px);
+        }
+
+        /* Navigation Styles */
+        .nav-container {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 300px;
+            height: calc(100vh - 80px);
+            background: var(--background-card);
+            border-right: 1px solid var(--border-color);
+            overflow-y: auto;
+            z-index: 999;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-toggle {
+            display: none;
+            position: fixed;
+            top: 90px;
+            left: 10px;
+            z-index: 1001;
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .nav-menu {
+            padding: 2rem 0;
+        }
+
+        .nav-section {
+            margin-bottom: 1rem;
+        }
+
+        .nav-section h3 {
+            padding: 0.5rem 1.5rem;
+            color: var(--highlight-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-item {
+            display: block;
+            padding: 0.75rem 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .nav-item:hover,
+        .nav-item.active {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border-left-color: var(--highlight-color);
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-left: 300px;
+            margin-top: 80px;
+            padding: 2rem;
+            max-width: calc(100vw - 300px);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        .section {
+            background: var(--background-card);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+        }
+
+        .section-title {
+            color: var(--highlight-color);
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .section-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .expand-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .section.collapsed .expand-icon {
+            transform: rotate(-90deg);
+        }
+
+        .section-content {
+            transition: all 0.3s ease;
+        }
+
+        .section.collapsed .section-content {
+            display: none;
+        }
+
+        /* Coach's Tips and Key Takeaways */
+        .coach-tip,
+        .key-takeaway {
+            background: linear-gradient(135deg, var(--accent-color), var(--secondary-color));
+            border-left: 4px solid var(--highlight-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .coach-tip h4,
+        .key-takeaway h4 {
+            color: var(--highlight-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: var(--background-dark);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .data-table tr:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Interactive Elements */
+        .tooltip {
+            position: relative;
+            cursor: help;
+            color: var(--highlight-color);
+            text-decoration: underline;
+        }
+
+        .tooltip-content {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--background-dark);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            border: 1px solid var(--border-color);
+        }
+
+        .tooltip:hover .tooltip-content {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .copy-button {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .copy-button:hover {
+            background: var(--highlight-color);
+        }
+
+        /* Battle Cards */
+        .battle-card {
+            background: var(--secondary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .battle-card-header {
+            background: var(--accent-color);
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .battle-card-content {
+            padding: 1rem;
+            display: none;
+        }
+
+        .battle-card.active .battle-card-content {
+            display: block;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: var(--secondary-color);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .quiz-question {
+            margin-bottom: 1.5rem;
+        }
+
+        .quiz-options {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .quiz-option {
+            background: var(--background-card);
+            margin: 0.5rem 0;
+            padding: 0.75rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-option:hover {
+            background: var(--accent-color);
+        }
+
+        .quiz-option.selected {
+            background: var(--highlight-color);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-color);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-color);
+        }
+
+        /* Search Functionality */
+        .search-container {
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--background-card);
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Edit Mode Styles */
+        .edit-mode .editable {
+            border: 2px dashed var(--highlight-color);
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            cursor: text;
+        }
+
+        .edit-mode .editable:hover {
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        /* Expandable Sections */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .expand-btn {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: var(--highlight-color);
+        }
+
+        .subsection {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--background-card);
+            border-left: 3px solid var(--accent-color);
+            border-radius: 5px;
+        }
+
+        .subsection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .remove-btn {
+            background: var(--error-color);
+            color: white;
+            border: none;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .remove-btn:hover {
+            background: #c53030;
+        }
+
+        .add-subsection-form {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--secondary-color);
+            border-radius: 5px;
+        }
+
+        .add-subsection-form input,
+        .add-subsection-form textarea {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            background: var(--background-card);
+            border: 1px solid var(--border-color);
+            border-radius: 3px;
+            color: var(--text-primary);
+        }
+
+        .add-subsection-form button {
+            background: var(--accent-color);
+            color: var(--text-primary);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                transform: translateX(-100%);
+            }
+
+            .nav-container.open {
+                transform: translateX(0);
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+
+            .section {
+                padding: 1rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">D.A.R.K. Leverage Model™</div>
+            <div class="header-controls">
+                <button class="export-btn" onclick="exportToPDF()" title="Export to PDF">
+                    📄 Export PDF
+                </button>
+                <button class="export-btn" onclick="exportToWord()" title="Export to Word">
+                    📝 Export Word
+                </button>
+                <button class="edit-mode-toggle" onclick="toggleEditMode()">
+                    <span id="edit-mode-text">Enable Edit Mode</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Toggle for Mobile -->
+    <button class="nav-toggle" onclick="toggleNav()">☰</button>
+
+    <!-- Navigation -->
+    <nav class="nav-container" id="navigation">
+        <div class="nav-menu">
+            <div class="nav-section">
+                <h3>Core Framework</h3>
+                <a href="#section1" class="nav-item">1. The D.A.R.K. Vision</a>
+                <a href="#section2" class="nav-item">2. The Core Model</a>
+                <a href="#section3" class="nav-item">3. The Ideal Customer</a>
+            </div>
+            <div class="nav-section">
+                <h3>Sales Process</h3>
+                <a href="#section4" class="nav-item">4. The Buyer's Journey</a>
+                <a href="#section5" class="nav-item">5. Pricing & ROI</a>
+                <a href="#section6" class="nav-item">6. Overcoming Obstacles</a>
+            </div>
+            <div class="nav-section">
+                <h3>Execution</h3>
+                <a href="#section7" class="nav-item">7. Sales Assets</a>
+                <a href="#section8" class="nav-item">8. Closing & Handoff</a>
+                <a href="#section9" class="nav-item">9. Knowledge Center</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Search Functionality -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search the ebook..." id="searchInput" onkeyup="searchContent()">
+            </div>
+
+            <!-- Welcome Section -->
+            <div class="section fade-in">
+                <div class="section-header">
+                    <div>
+                        <h1 class="section-title">Welcome to Your Sales Bible</h1>
+                        <p class="section-subtitle">The Complete D.A.R.K. Leverage Model™ Sales Enablement Guide</p>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Your Mission</h4>
+                        <p>This ebook is your single source of truth for selling the D.A.R.K. Leverage Model™. By the time you finish reading this, you'll know exactly what we sell, who we sell to, and how to close deals with confidence. Every section builds on the last, so read it in order the first time through.</p>
+                    </div>
+                    
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip</h4>
+                        <p>Bookmark this page and return to it often. The best salespeople treat their playbook like a pilot treats their pre-flight checklist—they review it before every important conversation.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Section 1: The D.A.R.K. Vision -->
+            <div class="section fade-in" id="section1">
+                <div class="section-header">
+                    <div onclick="toggleSection(this.parentElement.parentElement)">
+                        <h2 class="section-title">1. The D.A.R.K. Vision (Why We Win)</h2>
+                        <p class="section-subtitle">Develop unshakeable belief in our solution</p>
+                    </div>
+                    <div>
+                        <button class="expand-btn" onclick="showAddSubsectionForm('section1')">+ Add Subsection</button>
+                        <span class="expand-icon" onclick="toggleSection(this.parentElement.parentElement.parentElement)">▼</span>
+                    </div>
+                </div>
+                <div class="add-subsection-form" id="add-form-section1">
+                    <input type="text" placeholder="Subsection Title" id="title-section1">
+                    <textarea placeholder="Subsection Content" rows="4" id="content-section1"></textarea>
+                    <button onclick="addSubsection('section1')">Add</button>
+                    <button onclick="hideAddSubsectionForm('section1')">Cancel</button>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Before you can sell D.A.R.K., you need to believe in it completely. This section gives you the foundational story and vision that will make you confident in every sales conversation. When you truly understand WHY we exist and WHY we win, that conviction will come through in your voice.</p>
+                    </div>
+
+                    <h3 class="editable">Welcome to the Team</h3>
+                    <p class="editable">Congratulations on joining the D.A.R.K. Leverage Model™ sales team. You're now part of a revolutionary approach to business transformation that's changing how companies think about growth, efficiency, and wealth creation. Our mission is simple but powerful: we transform high-leak businesses into self-compounding growth engines.</p>
+
+                    <h3 class="editable">The Founding Insight: Systems vs. Advice</h3>
+                    <p class="editable">Most business consulting fails because it delivers <span class="tooltip">advice<span class="tooltip-content">Traditional consulting provides recommendations and strategies</span></span>, not <span class="tooltip">systems<span class="tooltip-content">D.A.R.K. builds and implements operational systems</span></span>. We discovered that 87% of SMBs ($2-50M revenue) leak cash through operational inefficiencies, lack recurring revenue models, and owner-dependency traps. These businesses work IN their business 60+ hours per week, achieving mediocre 15-25% margins while their enterprise counterparts operate at 40-60% margins with systematized operations.</p>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Use This in Discovery</h4>
+                        <p>When a prospect mentions they've "tried consultants before," immediately ask: "Did they leave you with advice or did they build systems that run without you?" This question instantly positions D.A.R.K. as different and gets them thinking about implementation vs. recommendations.</p>
+                    </div>
+
+                    <h3 class="editable">The Macro Trend: Perfect Storm</h3>
+                    <p class="editable">The "Great Resignation" and AI revolution have created a perfect storm: businesses can't find talent, can't afford enterprise consultants, yet must compete with tech-enabled competitors. Private equity dry powder exceeds $3.9 trillion, desperately seeking operationally excellent targets. Businesses achieving our <span class="tooltip">Value Builder<span class="tooltip-content">8-driver framework for business valuation</span></span> benchmarks sell for 3-5x higher multiples than industry averages.</p>
+
+                    <h3 class="editable">Why Now: The Inflection Point</h3>
+                    <p class="editable">Post-pandemic, every business recognizes the need for digital transformation and operational excellence. Traditional consulting's $500K+ engagements are inaccessible to the 6 million US businesses in our sweet spot. The D.A.R.K. Model delivers enterprise-grade transformation at 20% of the cost through our pod-based approach, automation stack, and reusable playbooks—making NOW the inflection point for massive market capture.</p>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>We don't sell services. We install operating systems that fund themselves. This isn't just a tagline—it's the fundamental difference between D.A.R.K. and every other business consultant in the market. When you internalize this distinction, you'll never struggle to differentiate us again.</p>
+                    </div>
+
+                    <h3 class="editable">Our Mission & Promise</h3>
+                    <p class="editable">Transform high-leak businesses into self-compounding growth engines by deploying operating systems, extracting proprietary data, and reinvesting surplus into scalable capital moves. We deliver 3-5x ROI within 90 days by addressing critical gaps in the 8 Value Builder drivers, helping businesses achieve 25-40% margin improvements while reducing owner dependence by 50%+.</p>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Memorize This Story</h4>
+                        <p>Practice telling the "advice vs. systems" story until you can deliver it naturally in under 60 seconds. This story should become your go-to response whenever someone asks "How are you different?" The contrast is so stark that prospects immediately understand our value proposition.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: The Core Model -->
+            <div class="section fade-in" id="section2">
+                <div class="section-header">
+                    <div onclick="toggleSection(this.parentElement.parentElement)">
+                        <h2 class="section-title">2. The Core Model (What We Sell)</h2>
+                        <p class="section-subtitle">Explain our complex model in a simple, compelling way</p>
+                    </div>
+                    <div>
+                        <button class="expand-btn" onclick="showAddSubsectionForm('section2')">+ Add Subsection</button>
+                        <span class="expand-icon" onclick="toggleSection(this.parentElement.parentElement.parentElement)">▼</span>
+                    </div>
+                </div>
+                <div class="add-subsection-form" id="add-form-section2">
+                    <input type="text" placeholder="Subsection Title" id="title-section2">
+                    <textarea placeholder="Subsection Content" rows="4" id="content-section2"></textarea>
+                    <button onclick="addSubsection('section2')">Add</button>
+                    <button onclick="hideAddSubsectionForm('section2')">Cancel</button>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>The D.A.R.K. Model is sophisticated, but your explanation must be simple. This section gives you the frameworks, analogies, and benefit-oriented language to make our complex system feel accessible and compelling to any business owner.</p>
+                    </div>
+
+                    <h3 class="editable">The 4-Pillar Blueprint (D.A.R.K.)</h3>
+                    <p class="editable">Think of D.A.R.K. as installing a new, high-performance operating system into a business. Just like upgrading from Windows 95 to Windows 11, the transformation touches every aspect of how the business runs, but the user experience becomes dramatically better.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Pillar</th>
+                                <th>Function</th>
+                                <th>Outcome</th>
+                                <th>Client Benefit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>D</strong> - Data Moat</td>
+                                <td>Capture anonymized cross-client metrics (KPIs, conversion rates, CAC, churn, cycle times)</td>
+                                <td>Predictive insight → pricing power → proprietary benchmarks</td>
+                                <td>Know what others guess—price accordingly</td>
+                            </tr>
+                            <tr>
+                                <td><strong>A</strong> - Automation Engine</td>
+                                <td>S.C.A.L.E. + AI + SOPs + pods + freelancers + automations</td>
+                                <td>Reduces delivery cost, shortens time-to-result, scales lean</td>
+                                <td>Your business runs itself while you sleep</td>
+                            </tr>
+                            <tr>
+                                <td><strong>R</strong> - Recurring Value Flywheel</td>
+                                <td>Clients get playbooks, dashboards, insights, and outcomes monthly</td>
+                                <td>Unlocks freedom from hourly billing → creates scalable, sellable revenue</td>
+                                <td>Turn your revenue roller coaster into an escalator</td>
+                            </tr>
+                            <tr>
+                                <td><strong>K</strong> - Kapital Deployment</td>
+                                <td>Deploy surplus cash into notes, bolt-on acquisitions, option-based cashflow</td>
+                                <td>Turns operating income into multi-source wealth + control</td>
+                                <td>Your business becomes your best investment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: How to Explain Each Pillar</h4>
+                        <p><strong>Data Moat:</strong> "We build systems to capture the metrics that matter, so you can make decisions based on data, not gut feelings."<br>
+                        <strong>Automation Engine:</strong> "We build systems to handle the repetitive work, which frees up your best people and cuts your operating costs."<br>
+                        <strong>Recurring Revenue:</strong> "We help you transform one-time sales into predictable monthly revenue that compounds over time."<br>
+                        <strong>Kapital Deployment:</strong> "We help you reinvest your profits strategically to create multiple income streams beyond your core business."</p>
+                    </div>
+
+                    <h3 class="editable">Execution Pods: Your Business SWAT Teams</h3>
+                    <p class="editable">Execution Pods are specialized, cross-functional micro-teams that attack specific business gaps with pre-built playbooks, defined tool stacks, and clear KPI targets. Think of them as modular "SWAT teams" for business problems.</p>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Pod Principles</h4>
+                        <ul>
+                            <li>Each pod has 3-5 fractional specialists (0.2-0.5 FTE each)</li>
+                            <li>Pods operate semi-autonomously with weekly check-ins</li>
+                            <li>Every pod has a pre-defined playbook that's reusable across clients</li>
+                            <li>Pods are outcome-focused, not hours-focused</li>
+                            <li>Pods are dynamically assembled based on client gaps</li>
+                        </ul>
+                    </div>
+
+                    <h3 class="editable">The 8 Core Pod Categories</h3>
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>1. Growth Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Lead generation, content marketing, paid acquisition, partnerships</p>
+                            <p><strong>Typical Crew:</strong> Growth strategist, content creators, automation specialists</p>
+                            <p><strong>Equipment:</strong> Video tools, CMS platforms, analytics, AI copywriting</p>
+                            <p><strong>KPI Framework:</strong> Leading (volume metrics), Lagging (conversion metrics), Efficiency (cost metrics)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>2. Revenue Optimization Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Pricing, sales efficiency, margin improvement, cost reduction</p>
+                            <p><strong>Typical Crew:</strong> Revenue analysts, sales ops, pricing strategists</p>
+                            <p><strong>Equipment:</strong> CRM tools, pricing calculators, sales automation</p>
+                            <p><strong>KPI Framework:</strong> Leading (activity metrics), Lagging (revenue metrics), Efficiency (margin metrics)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>3. Systems & Scale Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Process documentation, delegation, automation, knowledge transfer</p>
+                            <p><strong>Typical Crew:</strong> Ops specialists, SOP developers, automation engineers</p>
+                            <p><strong>Equipment:</strong> Documentation tools, workflow automation, project management</p>
+                            <p><strong>KPI Framework:</strong> Leading (tasks automated), Lagging (owner time), Efficiency (process time)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>4. Customer Success Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Retention, satisfaction, feedback loops, experience design</p>
+                            <p><strong>Typical Crew:</strong> CX designers, feedback analysts, retention specialists</p>
+                            <p><strong>Equipment:</strong> Survey tools, support platforms, communication automation</p>
+                            <p><strong>KPI Framework:</strong> Leading (engagement metrics), Lagging (satisfaction scores), Efficiency (response times)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>5. Recurring Revenue Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Productization, subscription design, retention systems</p>
+                            <p><strong>Typical Crew:</strong> Offer architects, RevOps specialists, retention analysts</p>
+                            <p><strong>Equipment:</strong> Billing platforms, subscription management, retention tools</p>
+                            <p><strong>KPI Framework:</strong> Leading (new subscribers), Lagging (MRR %), Efficiency (churn rate)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>6. Strategic Positioning Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Differentiation, competitive advantage, proprietary systems</p>
+                            <p><strong>Typical Crew:</strong> Strategy consultants, data scientists, IP developers</p>
+                            <p><strong>Equipment:</strong> Analytics platforms, AI/ML tools, research databases</p>
+                            <p><strong>KPI Framework:</strong> Leading (differentiation metrics), Lagging (win rate), Efficiency (competitive position)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>7. Financial Health Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Cash flow, working capital, financial operations</p>
+                            <p><strong>Typical Crew:</strong> Financial analysts, collections specialists, treasury ops</p>
+                            <p><strong>Equipment:</strong> Accounting software, payment automation, dashboards</p>
+                            <p><strong>KPI Framework:</strong> Leading (collection metrics), Lagging (cash position), Efficiency (cycle times)</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>8. Risk Mitigation Pods</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Focus Areas:</strong> Diversification, dependency reduction, supplier management</p>
+                            <p><strong>Typical Crew:</strong> Risk analysts, business development, supplier relations</p>
+                            <p><strong>Equipment:</strong> Pipeline tools, vendor management, analytics</p>
+                            <p><strong>KPI Framework:</strong> Leading (pipeline diversity), Lagging (concentration %), Efficiency (acquisition cost)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Section 3: The Ideal Customer -->
+            <div class="section fade-in" id="section3">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">3. The Ideal Customer (Who We Sell To)</h2>
+                        <p class="section-subtitle">Instantly recognize a good-fit customer and know their deepest pains</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Not every business is a good fit for D.A.R.K. This section teaches you to quickly identify prospects who will get massive value from our system and close fast. When you know exactly who to target, your conversion rates will skyrocket.</p>
+                    </div>
+
+                    <h3 class="editable">ICP 1: Overwhelmed Agency Owner</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>CEO/Founder</td>
+                            </tr>
+                            <tr>
+                                <td>Company Size</td>
+                                <td>$2-10M revenue, 10-30 employees</td>
+                            </tr>
+                            <tr>
+                                <td>Tech Stack</td>
+                                <td>Basic (QuickBooks, Google Workspace, maybe HubSpot)</td>
+                            </tr>
+                            <tr>
+                                <td>Buying Committee</td>
+                                <td>Owner + CFO/Ops Manager</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Top 5 Qualifying Questions for Agency Owners</h4>
+                        <ol>
+                            <li>"You mentioned working 60+ hours a week. Is that sustainable for you long-term?"</li>
+                            <li>"What percentage of your revenue comes from your top 3 clients?"</li>
+                            <li>"If you had to step away for 30 days unexpectedly, what would break first?"</li>
+                            <li>"How predictable is next month's revenue—recurring vs. project-based?"</li>
+                            <li>"When did you last raise prices, and what happened?"</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="editable">Primary Pains & Trigger Events:</h4>
+                    <ul class="editable">
+                        <li>Working 60+ hours/week with no exit plan</li>
+                        <li>Losing 2-3 key employees ("bus factor" crisis)</li>
+                        <li>Big client threatens to leave (>30% revenue concentration)</li>
+                        <li>Margin compression from competition</li>
+                        <li>Considering selling but valuation disappointing</li>
+                    </ul>
+
+                    <h4 class="editable">Success Metrics They Care About:</h4>
+                    <ul class="editable">
+                        <li>Hours worked per week: <40</li>
+                        <li>EBITDA margin: >35%</li>
+                        <li>Client concentration: <15% per client</li>
+                        <li>Business valuation: 4-6x EBITDA</li>
+                    </ul>
+
+                    <h3 class="editable">ICP 2: Growth-Stage SaaS Founder</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>CEO/CTO Co-founder</td>
+                            </tr>
+                            <tr>
+                                <td>Company Size</td>
+                                <td>$3-20M ARR, 20-75 employees</td>
+                            </tr>
+                            <tr>
+                                <td>Tech Stack</td>
+                                <td>Modern (Stripe, Intercom, Segment, AWS)</td>
+                            </tr>
+                            <tr>
+                                <td>Buying Committee</td>
+                                <td>CEO + COO/VP Ops + Board</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Top 5 Qualifying Questions for SaaS Founders</h4>
+                        <ol>
+                            <li>"What's your current churn rate and where does it need to be?"</li>
+                            <li>"How long is your sales cycle and what's driving the length?"</li>
+                            <li>"What's your CAC payback period and is that sustainable?"</li>
+                            <li>"Are you burning cash to grow or growing profitably?"</li>
+                            <li>"What operational metrics do your investors focus on most?"</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="editable">Primary Pains & Trigger Events:</h4>
+                    <ul class="editable">
+                        <li>High churn (>20% annually) killing growth</li>
+                        <li>Series A/B fundraise requires operational maturity</li>
+                        <li>Sales cycle too long (45+ days)</li>
+                        <li>Can't scale without burning cash</li>
+                        <li>Investors demanding path to profitability</li>
+                    </ul>
+
+                    <h4 class="editable">Success Metrics They Care About:</h4>
+                    <ul class="editable">
+                        <li>Churn rate: <10% annual</li>
+                        <li>CAC payback: <12 months</li>
+                        <li>Gross margins: >70%</li>
+                        <li>Rule of 40 score: >40%</li>
+                    </ul>
+
+                    <h3 class="editable">ICP 3: Professional Service Firm Partner</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Attribute</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>Managing Partner/Senior Partner</td>
+                            </tr>
+                            <tr>
+                                <td>Company Size</td>
+                                <td>$5-50M revenue, 25-200 employees</td>
+                            </tr>
+                            <tr>
+                                <td>Tech Stack</td>
+                                <td>Industry-specific + Microsoft suite</td>
+                            </tr>
+                            <tr>
+                                <td>Buying Committee</td>
+                                <td>Partner committee (3-5 decision makers)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Top 5 Qualifying Questions for Professional Services</h4>
+                        <ol>
+                            <li>"How many billable hours per week are your partners averaging?"</li>
+                            <li>"What percentage of your work is fixed-fee vs. hourly?"</li>
+                            <li>"How much non-billable time does your team spend on admin work?"</li>
+                            <li>"What's your succession plan for retiring partners?"</li>
+                            <li>"How do you compete when clients demand fixed pricing?"</li>
+                        </ol>
+                    </div>
+
+                    <h4 class="editable">Primary Pains & Trigger Events:</h4>
+                    <ul class="editable">
+                        <li>Billable hour model hitting ceiling</li>
+                        <li>Top talent leaving to start competing firms</li>
+                        <li>Clients demanding fixed-fee arrangements</li>
+                        <li>Succession planning for retiring partners</li>
+                        <li>Compliance/regulatory changes requiring systematization</li>
+                    </ul>
+
+                    <h4 class="editable">Success Metrics They Care About:</h4>
+                    <ul class="editable">
+                        <li>Revenue per employee: >$200K</li>
+                        <li>Partner distribution: >$500K</li>
+                        <li>Realization rate: >85%</li>
+                        <li>Non-billable efficiency: <20%</li>
+                    </ul>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>All three ICPs share common pain points: owner dependence, margin pressure, and scalability challenges. The specific triggers vary, but the underlying need for operational transformation is universal. Focus on the pain, not the industry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: The Buyer's Journey -->
+            <div class="section fade-in" id="section4">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">4. The Buyer's Journey (How We Sell)</h2>
+                        <p class="section-subtitle">Master our sales process and guide prospects from stage to stage</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Our sales process is designed to build trust, demonstrate value, and create urgency at each stage. When you understand what the buyer is thinking and what your goal is at each step, you can guide them smoothly toward a close.</p>
+                    </div>
+
+                    <h3 class="editable">Buyer Journey Map</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Stage</th>
+                                <th>Rep Action</th>
+                                <th>Buyer Intent Signal</th>
+                                <th>Content/Asset</th>
+                                <th>Exit Criteria</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Awareness</td>
+                                <td>Strategic outreach via LinkedIn/email</td>
+                                <td>Opens 2+ emails, views LinkedIn profile</td>
+                                <td>Value Builder benchmark report, "Hidden Profit" calculator</td>
+                                <td>Books discovery call</td>
+                            </tr>
+                            <tr>
+                                <td>Discovery</td>
+                                <td>Run 45-min Value Builder assessment</td>
+                                <td>Shares P&L, answers all 8 VB drivers</td>
+                                <td>Assessment results PDF, gap analysis heat map</td>
+                                <td>Agrees to strategy session</td>
+                            </tr>
+                            <tr>
+                                <td>Consideration</td>
+                                <td>Present Sprint Charter with 3 priority gaps</td>
+                                <td>Asks about similar client results</td>
+                                <td>TechFlow case study, ROI projection model</td>
+                                <td>Requests proposal/pricing</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluation</td>
+                                <td>Custom proposal with pod assignments</td>
+                                <td>Involves CFO/partners, checks references</td>
+                                <td>Video testimonials, reference call list</td>
+                                <td>Verbal commitment</td>
+                            </tr>
+                            <tr>
+                                <td>Decision</td>
+                                <td>Contract negotiation, payment terms</td>
+                                <td>Redlines contract, asks about guarantees</td>
+                                <td>MSA template, success metrics dashboard</td>
+                                <td>Signed agreement + deposit</td>
+                            </tr>
+                            <tr>
+                                <td>Onboarding</td>
+                                <td>Kickoff call, data collection</td>
+                                <td>Provides access to systems/financials</td>
+                                <td>Onboarding checklist, week 1 playbook</td>
+                                <td>All data collected</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="editable">Discovery Deep Dive</h3>
+                    <p class="editable">Discovery is where deals are won or lost. Your goal is to uncover pain, quantify impact, and create urgency for change. Use these proven questions to guide the conversation:</p>
+
+                    <div class="coach-tip">
+                        <h4>💡 The 10 Opening Discovery Questions</h4>
+                        <ol>
+                            <li>"Walk me through your typical week—where do you spend most of your time?"</li>
+                            <li>"If you had to step away for 30 days unexpectedly, what would break first?"</li>
+                            <li>"What percentage of revenue comes from your top 3 clients?"</li>
+                            <li>"How predictable is next month's revenue—recurring vs. project-based?"</li>
+                            <li>"What's your current EBITDA margin and where should it be?"</li>
+                            <li>"How many hours of non-billable work does your team do weekly?"</li>
+                            <li>"When did you last raise prices, and what happened?"</li>
+                            <li>"What's preventing you from scaling—people, processes, or profits?"</li>
+                            <li>"If someone offered to buy your business tomorrow, what would concern them most?"</li>
+                            <li>"What's the one number that, if improved by 50%, would transform your business?"</li>
+                        </ol>
+                    </div>
+
+                    <h3 class="editable">30-Second Product Narrative</h3>
+                    <div class="key-takeaway">
+                        <h4>🎯 Memorize This Pitch</h4>
+                        <p class="editable">"Most businesses between $2-50M are brilliant at what they do but bleeding cash through operational gaps. The D.A.R.K. Leverage Model identifies exactly where you're leaking money across 8 value drivers, then deploys specialized teams to fix each gap with proven playbooks. Instead of advice, we install systems that run themselves. The result? Our average client sees 40% margin improvement and cuts owner hours in half within 90 days. We don't sell consulting—we install profit engines that fund themselves."</p>
+                    </div>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip</h4>
+                        <p>Pause after "bleeding cash" to let it sink in. Watch for the nod—that's when you know they're feeling the pain you just described.</p>
+                    </div>
+
+                    <h3 class="editable">Demo Storyboard</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Section</th>
+                                <th>Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>0:00-0:30</td>
+                                <td>Hook</td>
+                                <td>"Let me show you exactly how we transformed TechFlow from 15% to 28% margins..."</td>
+                            </tr>
+                            <tr>
+                                <td>0:30-2:00</td>
+                                <td>Problem Agitation</td>
+                                <td>Show Value Builder assessment results (mock data)<br>Point to red scores: "See these gaps? Each costs $200K+ annually"<br>Highlight owner dependence score: "This is why you work weekends"</td>
+                            </tr>
+                            <tr>
+                                <td>2:00-4:00</td>
+                                <td>Solution Reveal</td>
+                                <td>Display pod deployment matrix<br>Show week-by-week sprint plan<br>Demo live KPI dashboard: "Every metric, updated daily"</td>
+                            </tr>
+                            <tr>
+                                <td>4:00-5:00</td>
+                                <td>Outcome Visualization</td>
+                                <td>Show before/after P&L comparison<br>Display owner hours: 70 → 35/week<br>Preview exit valuation impact: "3x to 5x multiple"</td>
+                            </tr>
+                            <tr>
+                                <td>5:00-5:30</td>
+                                <td>Call to Action</td>
+                                <td>"Based on what you've shared, I see 3 immediate gaps we could attack. Should we map out your custom sprint plan?"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>Every stage of the buyer's journey has a specific goal. Don't try to close in discovery or educate in the decision stage. Match your approach to where the buyer is mentally, and guide them naturally to the next step.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Section 5: Pricing, Packages & ROI -->
+            <div class="section fade-in" id="section5">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">5. Pricing, Packages & ROI</h2>
+                        <p class="section-subtitle">Confidently present our pricing as a high-value investment</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Price is never the real objection—value is. This section teaches you to frame our pricing as an investment with guaranteed returns, not a cost. When you can demonstrate clear ROI, price becomes irrelevant.</p>
+                    </div>
+
+                    <h3 class="editable">Core Sprint Packages</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Package</th>
+                                <th>Duration</th>
+                                <th>Investment Range</th>
+                                <th>Discount</th>
+                                <th>Best For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Single Sprint</td>
+                                <td>90 days</td>
+                                <td>$45,000-$75,000</td>
+                                <td>-</td>
+                                <td>Testing our approach, specific gap focus</td>
+                            </tr>
+                            <tr>
+                                <td>Double Sprint</td>
+                                <td>180 days</td>
+                                <td>$80,000-$140,000</td>
+                                <td>10%</td>
+                                <td>Comprehensive transformation, multiple gaps</td>
+                            </tr>
+                            <tr>
+                                <td>Transformation Year</td>
+                                <td>360 days</td>
+                                <td>$150,000-$250,000</td>
+                                <td>20%</td>
+                                <td>Complete business overhaul, exit preparation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Frame as Investment Level</h4>
+                        <p>Never say "cost" or "price"—always use "investment level." Ask: "Based on the gaps we've identified, what investment level makes sense for your business?" This language shift changes the entire conversation from expense to opportunity.</p>
+                    </div>
+
+                    <h3 class="editable">Add-On Services</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Add-On</th>
+                                <th>Investment</th>
+                                <th>Description</th>
+                                <th>When to Offer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Additional Pod Deployment</td>
+                                <td>$15,000/pod/sprint</td>
+                                <td>Deploy extra specialized teams for complex gaps</td>
+                                <td>When assessment shows 5+ critical gaps</td>
+                            </tr>
+                            <tr>
+                                <td>Automation Acceleration</td>
+                                <td>$20,000</td>
+                                <td>Advanced n8n/AI setup for complex workflows</td>
+                                <td>For tech-savvy clients with complex processes</td>
+                            </tr>
+                            <tr>
+                                <td>Capital Deployment Advisory</td>
+                                <td>2% of deployed capital</td>
+                                <td>Strategic guidance on surplus cash investment</td>
+                                <td>For clients with >$500K cash reserves</td>
+                            </tr>
+                            <tr>
+                                <td>Ongoing Optimization</td>
+                                <td>$10,000/month minimum</td>
+                                <td>Monthly retainer for continuous improvement</td>
+                                <td>After successful sprint completion</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="editable">Sample ROI Calculator</h3>
+                    <p class="editable">Use this example to show prospects how quickly D.A.R.K. pays for itself. Customize the numbers based on their actual business metrics:</p>
+
+                    <div class="key-takeaway">
+                        <h4>📊 15-Employee Service Business Example</h4>
+                        <p><strong>INPUTS:</strong></p>
+                        <ul>
+                            <li>Current revenue: $3M</li>
+                            <li>Current EBITDA: $450K (15%)</li>
+                            <li>Average employee cost: $75K</li>
+                        </ul>
+                        
+                        <p><strong>D.A.R.K. IMPACT (90 days):</strong></p>
+                        <ul>
+                            <li>Margin improvement: 15% → 28% = $390K additional EBITDA</li>
+                            <li>Owner time savings: 30 hrs/week × $200/hr × 50 weeks = $300K value</li>
+                            <li>Revenue growth from systems: 20% = $600K</li>
+                            <li><strong>Total value created: $1,290,000</strong></li>
+                        </ul>
+                        
+                        <p><strong>INVESTMENT:</strong> $75,000 (sprint) + $120,000 (annual retainer)</p>
+                        <p><strong>ROI: 560% (Year 1)</strong></p>
+                        <p><strong>Payback period: 8 weeks</strong></p>
+                    </div>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Walk Through Each Line Item</h4>
+                        <p>Don't just show the final ROI number. Walk through each component so they understand exactly how you calculated the value. Ask: "Which of these improvements would have the biggest impact on your business?" This gets them thinking about outcomes, not investment.</p>
+                    </div>
+
+                    <h3 class="editable">Procurement Checklist</h3>
+                    <p class="editable">Use this checklist to ensure smooth contract execution:</p>
+                    <ul class="editable">
+                        <li>✅ NDA executed</li>
+                        <li>✅ Data room access provided</li>
+                        <li>✅ Stakeholder alignment confirmed</li>
+                        <li>✅ Budget approved</li>
+                        <li>✅ Success metrics defined</li>
+                        <li>✅ Sprint start date selected</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 6: Overcoming Obstacles -->
+            <div class="section fade-in" id="section6">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">6. Overcoming Obstacles</h2>
+                        <p class="section-subtitle">Confidently handle any objection or competitor</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Objections and competition are inevitable. This section gives you the frameworks and language to turn obstacles into opportunities. When you can handle objections confidently, prospects trust you more.</p>
+                    </div>
+
+                    <h3 class="editable">Competitive Battle-Cards</h3>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>vs. Traditional Consulting (McKinsey, Bain, Deloitte)</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Positioning:</strong> "Enterprise transformation at SMB prices"</p>
+                            <p><strong>Land-mine Questions:</strong></p>
+                            <ol>
+                                <li>"What's the minimum engagement size they'll accept?"</li>
+                                <li>"How many partner-level hours do you actually get?"</li>
+                                <li>"Do they leave you with systems or just PowerPoints?"</li>
+                            </ol>
+                            <p><strong>Knock-out Differentiator:</strong> We deploy fractional specialists who implement, not MBAs who advise. 80% less cost, 3x faster results.</p>
+                            <p><strong>Reference Logo:</strong> TechFlow Solutions (chose us over Deloitte)</p>
+                            <div class="coach-tip">
+                                <h4>💡 Proactive Framing</h4>
+                                <p>"Many of our clients have considered the big consulting firms. They're great if you have $500K+ and 18 months to spare. But if you want systems that actually work and results in 90 days, that's where we excel."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>vs. EOS Implementers</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Positioning:</strong> "EOS gives you a framework, we give you a profit engine"</p>
+                            <p><strong>Land-mine Questions:</strong></p>
+                            <ol>
+                                <li>"How does EOS specifically improve your margins?"</li>
+                                <li>"What technology stack comes with EOS?"</li>
+                                <li>"Where's the ROI tracking dashboard?"</li>
+                            </ol>
+                            <p><strong>Knock-out Differentiator:</strong> EOS is organizational theory. We're operational transformation with guaranteed financial outcomes.</p>
+                            <p><strong>Reference Logo:</strong> Apex Marketing (EOS for 2 years, switched to D.A.R.K.)</p>
+                            <div class="coach-tip">
+                                <h4>💡 Proactive Framing</h4>
+                                <p>"Early in the call, you can ask, 'Many of our clients have used frameworks like EOS. They're great for organizing people, but they often struggle to connect that theory to the technology and workflows that actually improve profit margins. Have you found that to be the case?'"</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>vs. Fractional CFOs</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Positioning:</strong> "We fix the business, not just report on it"</p>
+                            <p><strong>Land-mine Questions:</strong></p>
+                            <ol>
+                                <li>"Does your CFO also fix operations and sales?"</li>
+                                <li>"What automations have they built for you?"</li>
+                                <li>"How many new revenue streams have they created?"</li>
+                            </ol>
+                            <p><strong>Knock-out Differentiator:</strong> CFOs manage money. We create it through operational excellence across all 8 value drivers.</p>
+                            <p><strong>Reference Logo:</strong> CloudFirst Software (kept CFO, added D.A.R.K.)</p>
+                            <div class="coach-tip">
+                                <h4>💡 Proactive Framing</h4>
+                                <p>"Fractional CFOs are great for financial management. But if the business operations are broken, even the best CFO can't fix that. We work with many clients who have fractional CFOs—we fix the operations, they manage the money."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>vs. Revenue Operations Consultancies</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Positioning:</strong> "RevOps is one pod, we transform the entire business"</p>
+                            <p><strong>Land-mine Questions:</strong></p>
+                            <ol>
+                                <li>"What about operations, finance, and customer success?"</li>
+                                <li>"Do they address owner dependence?"</li>
+                                <li>"Where's the succession planning?"</li>
+                            </ol>
+                            <p><strong>Knock-out Differentiator:</strong> RevOps fixes sales. We fix sales, operations, finance, systems—everything that drives valuation.</p>
+                            <p><strong>Reference Logo:</strong> DataSync Inc. (RevOps couldn't fix margins)</p>
+                            <div class="coach-tip">
+                                <h4>💡 Proactive Framing</h4>
+                                <p>"RevOps consultants are excellent at optimizing your sales process. But if your operations, finance, and customer success aren't aligned, you're still leaving money on the table. We take a holistic approach."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>vs. DIY/Internal Effort</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p><strong>Positioning:</strong> "You know your business, we know transformation"</p>
+                            <p><strong>Land-mine Questions:</strong></p>
+                            <ol>
+                                <li>"How many business transformations has your team led?"</li>
+                                <li>"Where will you find 8 fractional specialists?"</li>
+                                <li>"What if you're wrong about the root cause?"</li>
+                            </ol>
+                            <p><strong>Knock-out Differentiator:</strong> We've transformed 150+ businesses. Your team is great at your business, we're great at transformation.</p>
+                            <p><strong>Reference Logo:</strong> TechFlow tried for 18 months, we fixed in 90 days</p>
+                            <div class="coach-tip">
+                                <h4>💡 Proactive Framing</h4>
+                                <p>"I respect that you want to handle this internally. The question is: how long can you afford to experiment? We've seen this exact pattern 150+ times. We know what works."</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 class="editable">Objection-Handling Matrix</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Objection</th>
+                                <th>Reframe</th>
+                                <th>Evidence</th>
+                                <th>Asset Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>"Too expensive"</td>
+                                <td>"Investment, not cost"</td>
+                                <td>"TechFlow paid back in 3.5 weeks"</td>
+                                <td>ROI calculator</td>
+                            </tr>
+                            <tr>
+                                <td>"We're too unique"</td>
+                                <td>"Every business thinks that"</td>
+                                <td>"150+ 'unique' businesses transformed"</td>
+                                <td>Industry case studies</td>
+                            </tr>
+                            <tr>
+                                <td>"Bad timing"</td>
+                                <td>"When is good timing for profit?"</td>
+                                <td>"Q4 implementations = Q1 results"</td>
+                                <td>Implementation timeline</td>
+                            </tr>
+                            <tr>
+                                <td>"Need board approval"</td>
+                                <td>"Let's build the business case together"</td>
+                                <td>"Board-ready ROI model included"</td>
+                                <td>Board deck template</td>
+                            </tr>
+                            <tr>
+                                <td>"Already have consultants"</td>
+                                <td>"Complementary, not competitive"</td>
+                                <td>"We work with existing advisors"</td>
+                                <td>Partnership model</td>
+                            </tr>
+                            <tr>
+                                <td>"Can't share financials"</td>
+                                <td>"Start with operational data"</td>
+                                <td>"Phased disclosure process"</td>
+                                <td>NDA + data security</td>
+                            </tr>
+                            <tr>
+                                <td>"90 days too fast"</td>
+                                <td>"Momentum matters"</td>
+                                <td>"Slow transformations fail 73%"</td>
+                                <td>Sprint methodology</td>
+                            </tr>
+                            <tr>
+                                <td>"Team bandwidth concerns"</td>
+                                <td>"We do the heavy lifting"</td>
+                                <td>"Your team: 2-3 hrs/week max"</td>
+                                <td>Resource plan</td>
+                            </tr>
+                            <tr>
+                                <td>"Tried consultants before"</td>
+                                <td>"Advice vs. implementation"</td>
+                                <td>"We build, not recommend"</td>
+                                <td>Deliverables list</td>
+                            </tr>
+                            <tr>
+                                <td>"Economic uncertainty"</td>
+                                <td>"Efficient businesses win recessions"</td>
+                                <td>"Downturn preparation"</td>
+                                <td>Market analysis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>Every objection is really a request for more information. Don't argue—acknowledge, reframe, and provide evidence. The goal is to understand their concern and address it with proof, not persuasion.</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Section 7: Sales Assets & Templates -->
+            <div class="section fade-in" id="section7">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">7. Sales Assets & Templates</h2>
+                        <p class="section-subtitle">Use proven templates for effective outreach</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Consistent messaging drives consistent results. These proven templates have generated millions in pipeline. Use them as-is or customize them, but always personalize for maximum impact.</p>
+                    </div>
+
+                    <h3 class="editable">Cold Email Template #1 (Plain Text)</h3>
+                    <div class="coach-tip">
+                        <h4>📧 When to Use This</h4>
+                        <p>First outreach to prospects who haven't engaged with your content. Works best for agency owners and professional services.</p>
+                        <h4>🎯 How to Personalize It</h4>
+                        <p>Research their recent growth, employee count, and industry challenges. Mention specific details in the opening.</p>
+                    </div>
+                    
+                    <div style="background: var(--background-dark); padding: 1rem; border-radius: 5px; margin: 1rem 0; font-family: monospace;">
+                        <p><strong>Subject:</strong> Question about {{company}}'s margins</p>
+                        <br>
+                        <p>Hi {{first_name}},</p>
+                        <br>
+                        <p>Noticed {{company}} has grown impressively to {{employee_count}} employees.</p>
+                        <br>
+                        <p>Quick question: Are you satisfied with your EBITDA margins relative to the hours you're working?</p>
+                        <br>
+                        <p>I ask because we typically find businesses your size are leaving 10-15% margin on the table through operational gaps they can't see from the inside.</p>
+                        <br>
+                        <p>We just helped TechFlow (similar size, {{industry}}) improve margins from 15% to 28% in 90 days while cutting the owner's hours in half.</p>
+                        <br>
+                        <p>Worth a brief conversation to see if there's similar opportunity at {{company}}?</p>
+                        <br>
+                        <p>Best,<br>{{your_name}}</p>
+                        <br>
+                        <p>P.S. Here's a 2-min video showing exactly what we did: {{case_study_link}}</p>
+                        <button class="copy-button" onclick="copyToClipboard(this.previousElementSibling)">Copy Template</button>
+                    </div>
+
+                    <h3 class="editable">Cold Email Template #2 (HTML)</h3>
+                    <div class="coach-tip">
+                        <h4>📧 When to Use This</h4>
+                        <p>Follow-up email or when you've seen them engage with your LinkedIn content. The formatting makes it more visually appealing.</p>
+                        <h4>🎯 How to Personalize It</h4>
+                        <p>Reference their specific LinkedIn post or challenge they've mentioned publicly.</p>
+                    </div>
+
+                    <div style="background: var(--background-dark); padding: 1rem; border-radius: 5px; margin: 1rem 0; font-family: monospace;">
+                        <p><strong>Subject:</strong> {{first_name}}, saw your post about scaling challenges</p>
+                        <br>
+                        <p>Hi {{first_name}},</p>
+                        <br>
+                        <p>Your LinkedIn post about {{specific_challenge}} resonated. That exact issue cost our client $400K annually until we fixed it.</p>
+                        <br>
+                        <p><strong>The pattern we see with {{industry}} companies at your stage:</strong></p>
+                        <ul>
+                            <li>Working 60+ hours but margins stuck at 15-20%</li>
+                            <li>Revenue growing but profits aren't</li>
+                            <li>Everything depends on you being there</li>
+                        </ul>
+                        <br>
+                        <p><strong>What changes in 90 days with D.A.R.K.:</strong></p>
+                        <ul>
+                            <li>✓ Margins improve 10-15 points</li>
+                            <li>✓ Owner hours cut by 50%</li>
+                            <li>✓ Business runs without you</li>
+                        </ul>
+                        <br>
+                        <p>TechFlow's CEO said: <em>"Best investment we ever made—paid back in 3 weeks."</em></p>
+                        <br>
+                        <p>15 minutes to explore if this applies to {{company}}?</p>
+                        <br>
+                        <p><a href="{{calendar_link}}">Grab time here</a> or just reply with your availability.</p>
+                        <br>
+                        <p>Best,<br>{{your_name}}</p>
+                        <br>
+                        <p>P.S. Free Value Builder assessment shows exactly where you're leaking profit: {{assessment_link}}</p>
+                        <button class="copy-button" onclick="copyToClipboard(this.previousElementSibling)">Copy Template</button>
+                    </div>
+
+                    <h3 class="editable">LinkedIn DM Script</h3>
+                    <div class="coach-tip">
+                        <h4>💼 When to Use This</h4>
+                        <p>After connecting on LinkedIn or when you have mutual connections. Keep it conversational and brief.</p>
+                        <h4>🎯 How to Personalize It</h4>
+                        <p>Mention the mutual connection by name and reference something specific from their profile or recent activity.</p>
+                    </div>
+
+                    <div style="background: var(--background-dark); padding: 1rem; border-radius: 5px; margin: 1rem 0; font-family: monospace;">
+                        <p>Hi {{first_name}}, noticed we share connections with [mutual].</p>
+                        <br>
+                        <p>Quick question: What's the biggest operational bottleneck holding back {{company}}'s growth right now?</p>
+                        <br>
+                        <p>(Asking because we specialize in removing exactly those kinds of blocks—happy to share what's worked for similar companies if helpful)</p>
+                        <button class="copy-button" onclick="copyToClipboard(this.previousElementSibling)">Copy Template</button>
+                    </div>
+
+                    <h3 class="editable">Voicemail Script (<20 seconds)</h3>
+                    <div style="background: var(--background-dark); padding: 1rem; border-radius: 5px; margin: 1rem 0; font-family: monospace;">
+                        <p>"Hi {{first_name}}, {{your_name}} here. Calling about the profit gaps we typically see in {{industry}} businesses around {{company_size}} in size.</p>
+                        <br>
+                        <p>Just helped a similar company add $400K to their bottom line in 90 days.</p>
+                        <br>
+                        <p>Worth a quick conversation—call me back at {{number}} or grab time at {{calendar_shortlink}}."</p>
+                        <button class="copy-button" onclick="copyToClipboard(this.previousElementSibling)">Copy Template</button>
+                    </div>
+
+                    <h3 class="editable">SMS Follow-up</h3>
+                    <div style="background: var(--background-dark); padding: 1rem; border-radius: 5px; margin: 1rem 0; font-family: monospace;">
+                        <p>Hi {{first_name}}, it's {{your_name}}. Left you a VM about fixing the margin gaps at {{company}}. Here's that case study I mentioned: {{link}}. Worth discussing?</p>
+                        <button class="copy-button" onclick="copyToClipboard(this.previousElementSibling)">Copy Template</button>
+                    </div>
+
+                    <h3 class="editable">Follow-up Cadence</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Channel</th>
+                                <th>Action</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Email</td>
+                                <td>Template #1</td>
+                                <td>Personalized opener</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>LinkedIn</td>
+                                <td>Connection + DM</td>
+                                <td>Reference mutual connection</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Email</td>
+                                <td>Template #2</td>
+                                <td>Different angle/pain point</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td>Phone</td>
+                                <td>Voicemail + SMS</td>
+                                <td>Case study link</td>
+                            </tr>
+                            <tr>
+                                <td>21</td>
+                                <td>Email</td>
+                                <td>Break-up email</td>
+                                <td>"Should I close your file?"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>Persistence pays, but personalization is what gets responses. Use the cadence as a framework, but always customize based on their engagement level and communication preferences.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Closing the Deal & Handoff -->
+            <div class="section fade-in" id="section8">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">8. Closing the Deal & Handoff</h2>
+                        <p class="section-subtitle">Negotiate effectively and ensure smooth client onboarding</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>The deal isn't done until the client is successfully onboarded and seeing results. This section ensures you close deals that stick and clients that succeed—which leads to referrals and upsells.</p>
+                    </div>
+
+                    <h3 class="editable">Give-Get Grid for Negotiation</h3>
+                    <p class="editable">Use this framework to negotiate win-win outcomes. Never give without getting something in return.</p>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>They Want</th>
+                                <th>You Give</th>
+                                <th>You Get</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Discount</td>
+                                <td>10% off 2nd sprint</td>
+                                <td>2-sprint commitment</td>
+                            </tr>
+                            <tr>
+                                <td>Extended terms</td>
+                                <td>Net 30 → Net 45</td>
+                                <td>50% deposit</td>
+                            </tr>
+                            <tr>
+                                <td>Guarantee</td>
+                                <td>Success metrics agreement</td>
+                                <td>Premium pricing</td>
+                            </tr>
+                            <tr>
+                                <td>Pilot program</td>
+                                <td>30-day assessment</td>
+                                <td>Full sprint commitment</td>
+                            </tr>
+                            <tr>
+                                <td>Reference checks</td>
+                                <td>5 references</td>
+                                <td>Signed LOI</td>
+                            </tr>
+                            <tr>
+                                <td>Reduced scope</td>
+                                <td>Remove 1 pod</td>
+                                <td>Keep core 2 pods</td>
+                            </tr>
+                            <tr>
+                                <td>Delay start</td>
+                                <td>Hold spot 30 days</td>
+                                <td>Non-refundable deposit</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Always Trade Value</h4>
+                        <p>When they ask for a concession, respond with: "I can explore that. Help me understand what you'd be willing to commit to in return?" This positions concessions as trades, not giveaways.</p>
+                    </div>
+
+                    <h3 class="editable">Red-Flag Terms to Escalate</h3>
+                    <p class="editable">These contract terms require immediate escalation to management. Never agree to them without approval:</p>
+                    <ul class="editable">
+                        <li>🚩 Payment contingent on results</li>
+                        <li>🚩 Unlimited revisions clause</li>
+                        <li>🚩 IP ownership of our methodologies</li>
+                        <li>🚩 Non-compete against their competitors</li>
+                        <li>🚩 Liability exceeding contract value</li>
+                        <li>🚩 Termination without cause <30 days</li>
+                        <li>🚩 Free ongoing support post-sprint</li>
+                    </ul>
+
+                    <h3 class="editable">Implementation & Handoff Checklist</h3>
+                    <p class="editable">Use this checklist to ensure smooth client onboarding and set the stage for success:</p>
+
+                    <h4 class="editable">Week 1 Checklist</h4>
+                    <ul class="editable">
+                        <li>✅ All contracts executed</li>
+                        <li>✅ Payment received/processed</li>
+                        <li>✅ System access granted</li>
+                        <li>✅ Data room populated</li>
+                        <li>✅ Kickoff call scheduled</li>
+                        <li>✅ Pod specialists assigned</li>
+                        <li>✅ Project workspace created</li>
+                        <li>✅ Stakeholder map confirmed</li>
+                    </ul>
+
+                    <h4 class="editable">90-Day Timeline</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Days</th>
+                                <th>Phase</th>
+                                <th>Key Activities</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1-5</td>
+                                <td>Assessment & data intake</td>
+                                <td>Complete Value Builder assessment, data collection</td>
+                            </tr>
+                            <tr>
+                                <td>6-10</td>
+                                <td>Sprint charter creation</td>
+                                <td>Gap analysis, pod selection, success metrics</td>
+                            </tr>
+                            <tr>
+                                <td>11-20</td>
+                                <td>Foundation building</td>
+                                <td>System setup, team training, initial automations</td>
+                            </tr>
+                            <tr>
+                                <td>21-40</td>
+                                <td>Core implementation</td>
+                                <td>Pod deployment, process optimization</td>
+                            </tr>
+                            <tr>
+                                <td>41-60</td>
+                                <td>Acceleration phase</td>
+                                <td>Advanced automations, performance tuning</td>
+                            </tr>
+                            <tr>
+                                <td>61-80</td>
+                                <td>Optimization sprint</td>
+                                <td>Fine-tuning, additional improvements</td>
+                            </tr>
+                            <tr>
+                                <td>81-90</td>
+                                <td>Handoff & training</td>
+                                <td>Knowledge transfer, documentation, next steps</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 class="editable">First-Value KPIs</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Week</th>
+                                <th>Milestone</th>
+                                <th>Success Metric</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Week 2</td>
+                                <td>First automation live</td>
+                                <td>At least 1 process automated</td>
+                            </tr>
+                            <tr>
+                                <td>Week 4</td>
+                                <td>Margin improvement visible</td>
+                                <td>2-3% margin increase measurable</td>
+                            </tr>
+                            <tr>
+                                <td>Week 6</td>
+                                <td>Owner hours reduced 25%</td>
+                                <td>10+ hours/week time savings</td>
+                            </tr>
+                            <tr>
+                                <td>Week 8</td>
+                                <td>Team adoption >80%</td>
+                                <td>New processes being used consistently</td>
+                            </tr>
+                            <tr>
+                                <td>Week 12</td>
+                                <td>ROI positive</td>
+                                <td>Value created exceeds investment</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="coach-tip">
+                        <h4>💡 Coach's Tip: Schedule Sprint 2 Conversation</h4>
+                        <p>Schedule the sprint 2 conversation on day 75, when results are clear but habits aren't cemented. This is when clients are most excited about continuing the transformation.</p>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Key Takeaway</h4>
+                        <p>The handoff is critical for client success and future upsells. A smooth onboarding experience sets the tone for the entire engagement and dramatically increases the likelihood of sprint 2 and referrals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 9: Knowledge Center & Certification -->
+            <div class="section fade-in" id="section9">
+                <div class="section-header" onclick="toggleSection(this)">
+                    <div>
+                        <h2 class="section-title">9. Knowledge Center & Certification</h2>
+                        <p class="section-subtitle">Master the D.A.R.K. language and certify your knowledge</p>
+                    </div>
+                    <span class="expand-icon">▼</span>
+                </div>
+                <div class="section-content">
+                    <div class="key-takeaway">
+                        <h4>🎯 Why This Section Matters</h4>
+                        <p>Fluency in D.A.R.K. terminology builds credibility and confidence. This section ensures you can speak our language naturally and pass the certification quiz that validates your expertise.</p>
+                    </div>
+
+                    <h3 class="editable">Unified Glossary & Acronyms</h3>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Term</th>
+                                <th>Definition</th>
+                                <th>Usage Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ARR</td>
+                                <td>Annual Recurring Revenue</td>
+                                <td>"What's your current ARR and growth rate?"</td>
+                            </tr>
+                            <tr>
+                                <td>CAC</td>
+                                <td>Customer Acquisition Cost</td>
+                                <td>"We'll help reduce your CAC by 30%"</td>
+                            </tr>
+                            <tr>
+                                <td>D.A.R.K.</td>
+                                <td>Data, Automation, Recurring, Kapital</td>
+                                <td>"The D.A.R.K. model addresses all four pillars"</td>
+                            </tr>
+                            <tr>
+                                <td>EBITDA</td>
+                                <td>Earnings Before Interest, Taxes, Depreciation, Amortization</td>
+                                <td>"What's your current EBITDA margin?"</td>
+                            </tr>
+                            <tr>
+                                <td>Execution Pod</td>
+                                <td>Specialized team that attacks specific business gaps</td>
+                                <td>"We'll deploy a Revenue Optimization Pod"</td>
+                            </tr>
+                            <tr>
+                                <td>ICP</td>
+                                <td>Ideal Customer Profile</td>
+                                <td>"You fit our agency owner ICP perfectly"</td>
+                            </tr>
+                            <tr>
+                                <td>Kapital Deployment</td>
+                                <td>Strategic reinvestment of surplus cash</td>
+                                <td>"Phase 4 focuses on Kapital Deployment"</td>
+                            </tr>
+                            <tr>
+                                <td>MRR</td>
+                                <td>Monthly Recurring Revenue</td>
+                                <td>"We'll help you build predictable MRR"</td>
+                            </tr>
+                            <tr>
+                                <td>S.C.A.L.E.</td>
+                                <td>Serve, Collaborate, Allocate, Lead, Educate framework</td>
+                                <td>"Our S.C.A.L.E. methodology guides implementation"</td>
+                            </tr>
+                            <tr>
+                                <td>Value Builder (VB)</td>
+                                <td>8-driver framework for business valuation</td>
+                                <td>"Let's run the Value Builder assessment"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="editable">Interactive Certification Quiz</h3>
+                    <div class="quiz-container">
+                        <div class="quiz-question">
+                            <h4>1. What are the 4 pillars of D.A.R.K.?</h4>
+                            <ul class="quiz-options">
+                                <li class="quiz-option" onclick="selectOption(this, false)">a) Data, Analytics, Revenue, Knowledge</li>
+                                <li class="quiz-option" onclick="selectOption(this, true)">b) Data Moat, Automation Engine, Recurring Value, Kapital Deployment</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">c) Design, Automate, Replicate, Keep</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">d) Diagnose, Analyze, Repair, Kickoff</li>
+                            </ul>
+                        </div>
+
+                        <div class="quiz-question">
+                            <h4>2. What's the typical ROI timeframe?</h4>
+                            <ul class="quiz-options">
+                                <li class="quiz-option" onclick="selectOption(this, false)">a) 6 months</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">b) 1 year</li>
+                                <li class="quiz-option" onclick="selectOption(this, true)">c) 3.5 weeks</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">d) 90 days</li>
+                            </ul>
+                        </div>
+
+                        <div class="quiz-question">
+                            <h4>3. Which Value Builder score indicates immediate sprint priority?</h4>
+                            <ul class="quiz-options">
+                                <li class="quiz-option" onclick="selectOption(this, false)">a) 75-100</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">b) 50-74</li>
+                                <li class="quiz-option" onclick="selectOption(this, true)">c) Below 50</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">d) All scores equally</li>
+                            </ul>
+                        </div>
+
+                        <div class="quiz-question">
+                            <h4>4. What's the average margin improvement?</h4>
+                            <ul class="quiz-options">
+                                <li class="quiz-option" onclick="selectOption(this, false)">a) 5-10%</li>
+                                <li class="quiz-option" onclick="selectOption(this, true)">b) 10-15 points</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">c) 20-30 points</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">d) 2-3%</li>
+                            </ul>
+                        </div>
+
+                        <div class="quiz-question">
+                            <h4>5. How many specialists typically comprise a pod?</h4>
+                            <ul class="quiz-options">
+                                <li class="quiz-option" onclick="selectOption(this, false)">a) 1-2</li>
+                                <li class="quiz-option" onclick="selectOption(this, true)">b) 3-5</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">c) 6-8</li>
+                                <li class="quiz-option" onclick="selectOption(this, false)">d) 10+</li>
+                            </ul>
+                        </div>
+
+                        <button onclick="submitQuiz()" style="background: var(--highlight-color); color: var(--text-primary); border: none; padding: 1rem 2rem; border-radius: 5px; cursor: pointer; font-size: 1rem; margin-top: 1rem;">Submit Quiz</button>
+                        <div id="quiz-results" style="margin-top: 1rem; display: none;"></div>
+                    </div>
+
+                    <h3 class="editable">FAQ Quick-Fire</h3>
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>How are you different from other consultants?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p>We implement systems, not advise. 80% less cost, 3x faster results, guaranteed ROI.</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>What if we're not ready for the full model?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p>Start with assessment + one pod. Scale based on results.</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>Do you work with PE-backed companies?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p>Yes, 30% of clients are PE-backed. We accelerate value creation for exits.</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>What industries do you avoid?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p>We don't work with restaurants, retail, or businesses under $2M revenue.</p>
+                        </div>
+                    </div>
+
+                    <div class="battle-card">
+                        <div class="battle-card-header" onclick="toggleBattleCard(this)">
+                            <span>Can we pay based on results?</span>
+                            <span>▼</span>
+                        </div>
+                        <div class="battle-card-content">
+                            <p>No. We guarantee the process and support, you own the results.</p>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <h4>🔑 Certification Requirements</h4>
+                        <p>To become D.A.R.K. certified, you must:</p>
+                        <ul>
+                            <li>Score 80% or higher on the certification quiz</li>
+                            <li>Complete a mock discovery call with your manager</li>
+                            <li>Demonstrate fluency with all key terms and concepts</li>
+                            <li>Successfully handle 3 common objections</li>
+                        </ul>
+                        <p><strong>Passing Score:</strong> 8/10 (80%)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+
+    <!-- JavaScript for Interactive Features -->
+    <script>
+        // Global variables
+        let editMode = false;
+        let quizAnswers = {};
+
+        // Initialize the ebook
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeNavigation();
+            initializeTooltips();
+            initializeSmoothScrolling();
+            updateActiveNavItem();
+        });
+
+        // Edit Mode Toggle
+        function toggleEditMode() {
+            editMode = !editMode;
+            const body = document.body;
+            const toggleButton = document.getElementById('edit-mode-text');
+            
+            if (editMode) {
+                body.classList.add('edit-mode');
+                toggleButton.textContent = 'Disable Edit Mode';
+                enableEditableElements();
+            } else {
+                body.classList.remove('edit-mode');
+                toggleButton.textContent = 'Enable Edit Mode';
+                disableEditableElements();
+            }
+        }
+
+        function enableEditableElements() {
+            const editableElements = document.querySelectorAll('.editable');
+            editableElements.forEach(element => {
+                element.contentEditable = true;
+                element.addEventListener('blur', saveEditableContent);
+            });
+        }
+
+        function disableEditableElements() {
+            const editableElements = document.querySelectorAll('.editable');
+            editableElements.forEach(element => {
+                element.contentEditable = false;
+                element.removeEventListener('blur', saveEditableContent);
+            });
+        }
+
+        function saveEditableContent(event) {
+            // In a real implementation, this would save to localStorage or send to server
+            console.log('Content saved:', event.target.textContent);
+            
+            // Visual feedback
+            const element = event.target;
+            const originalBorder = element.style.border;
+            element.style.border = '2px solid var(--success-color)';
+            setTimeout(() => {
+                element.style.border = originalBorder;
+            }, 1000);
+        }
+
+        // Navigation Functions
+        function initializeNavigation() {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        updateActiveNavItem(this);
+                    }
+                });
+            });
+        }
+
+        function updateActiveNavItem(activeItem = null) {
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            if (activeItem) {
+                activeItem.classList.add('active');
+            } else {
+                // Auto-detect active section based on scroll position
+                const sections = document.querySelectorAll('.section[id]');
+                let currentSection = null;
+                
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top <= 100 && rect.bottom >= 100) {
+                        currentSection = section.id;
+                    }
+                });
+                
+                if (currentSection) {
+                    const activeNavItem = document.querySelector(`[href="#${currentSection}"]`);
+                    if (activeNavItem) {
+                        activeNavItem.classList.add('active');
+                    }
+                }
+            }
+        }
+
+        function toggleNav() {
+            const nav = document.getElementById('navigation');
+            nav.classList.toggle('open');
+        }
+
+        // Section Toggle Functions
+        function toggleSection(header) {
+            const section = header.closest('.section');
+            const icon = header.querySelector('.expand-icon');
+            
+            section.classList.toggle('collapsed');
+            
+            if (section.classList.contains('collapsed')) {
+                icon.style.transform = 'rotate(-90deg)';
+            } else {
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Battle Card Functions
+        function toggleBattleCard(header) {
+            const battleCard = header.closest('.battle-card');
+            const icon = header.querySelector('span:last-child');
+            
+            battleCard.classList.toggle('active');
+            
+            if (battleCard.classList.contains('active')) {
+                icon.textContent = '▲';
+            } else {
+                icon.textContent = '▼';
+            }
+        }
+
+        // Copy to Clipboard Function
+        function copyToClipboard(element) {
+            const text = element.textContent || element.innerText;
+            
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopyFeedback(element);
+                });
+            } else {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback(element);
+            }
+        }
+
+        function showCopyFeedback(element) {
+            const button = element.nextElementSibling;
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = 'var(--success-color)';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = 'var(--accent-color)';
+            }, 2000);
+        }
+
+        // Quiz Functions
+        function selectOption(option, isCorrect) {
+            const question = option.closest('.quiz-question');
+            const options = question.querySelectorAll('.quiz-option');
+            
+            // Remove previous selections
+            options.forEach(opt => opt.classList.remove('selected'));
+            
+            // Select current option
+            option.classList.add('selected');
+            
+            // Store answer
+            const questionNumber = Array.from(document.querySelectorAll('.quiz-question')).indexOf(question) + 1;
+            quizAnswers[questionNumber] = {
+                selected: option.textContent,
+                correct: isCorrect
+            };
+        }
+
+        function submitQuiz() {
+            const totalQuestions = document.querySelectorAll('.quiz-question').length;
+            const answeredQuestions = Object.keys(quizAnswers).length;
+            
+            if (answeredQuestions < totalQuestions) {
+                alert(`Please answer all ${totalQuestions} questions before submitting.`);
+                return;
+            }
+            
+            let correctAnswers = 0;
+            Object.values(quizAnswers).forEach(answer => {
+                if (answer.correct) correctAnswers++;
+            });
+            
+            const score = Math.round((correctAnswers / totalQuestions) * 100);
+            const passed = score >= 80;
+            
+            // Show results
+            const resultsDiv = document.getElementById('quiz-results');
+            resultsDiv.style.display = 'block';
+            resultsDiv.innerHTML = `
+                <h4 style="color: ${passed ? 'var(--success-color)' : 'var(--error-color)'}">
+                    Quiz Results: ${score}% (${correctAnswers}/${totalQuestions})
+                </h4>
+                <p>${passed ? 
+                    '🎉 Congratulations! You passed the D.A.R.K. certification quiz.' : 
+                    '📚 Please review the material and retake the quiz. You need 80% to pass.'
+                }</p>
+            `;
+            
+            // Highlight correct/incorrect answers
+            document.querySelectorAll('.quiz-question').forEach((question, index) => {
+                const questionNumber = index + 1;
+                const answer = quizAnswers[questionNumber];
+                const selectedOption = question.querySelector('.quiz-option.selected');
+                
+                if (selectedOption) {
+                    if (answer.correct) {
+                        selectedOption.classList.add('correct');
+                    } else {
+                        selectedOption.classList.add('incorrect');
+                    }
+                }
+            });
+            
+            // Scroll to results
+            resultsDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Search Function
+        function searchContent() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sections = document.querySelectorAll('.section');
+            
+            if (searchTerm === '') {
+                // Show all sections
+                sections.forEach(section => {
+                    section.style.display = 'block';
+                    section.classList.remove('collapsed');
+                });
+                return;
+            }
+            
+            sections.forEach(section => {
+                const content = section.textContent.toLowerCase();
+                if (content.includes(searchTerm)) {
+                    section.style.display = 'block';
+                    section.classList.remove('collapsed'); // Expand matching sections
+                    
+                    // Highlight search terms (basic implementation)
+                    highlightSearchTerms(section, searchTerm);
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        }
+
+        function highlightSearchTerms(section, searchTerm) {
+            // This is a basic implementation - in production you'd want more sophisticated highlighting
+            const walker = document.createTreeWalker(
+                section,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+            
+            const textNodes = [];
+            let node;
+            while (node = walker.nextNode()) {
+                textNodes.push(node);
+            }
+            
+            textNodes.forEach(textNode => {
+                if (textNode.textContent.toLowerCase().includes(searchTerm)) {
+                    const parent = textNode.parentNode;
+                    if (parent.tagName !== 'SCRIPT' && parent.tagName !== 'STYLE') {
+                        const regex = new RegExp(`(${searchTerm})`, 'gi');
+                        const highlighted = textNode.textContent.replace(regex, '<mark>$1</mark>');
+                        const span = document.createElement('span');
+                        span.innerHTML = highlighted;
+                        parent.replaceChild(span, textNode);
+                    }
+                }
+            });
+        }
+
+        // Tooltip Initialization
+        function initializeTooltips() {
+            const tooltips = document.querySelectorAll('.tooltip');
+            tooltips.forEach(tooltip => {
+                tooltip.addEventListener('mouseenter', showTooltip);
+                tooltip.addEventListener('mouseleave', hideTooltip);
+            });
+        }
+
+        function showTooltip(event) {
+            const tooltip = event.target.querySelector('.tooltip-content');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            }
+        }
+
+        function hideTooltip(event) {
+            const tooltip = event.target.querySelector('.tooltip-content');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            }
+        }
+
+        // Smooth Scrolling
+        function initializeSmoothScrolling() {
+            // Update active nav item on scroll
+            window.addEventListener('scroll', () => {
+                updateActiveNavItem();
+            });
+        }
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', function(event) {
+            // Ctrl/Cmd + E for edit mode
+            if ((event.ctrlKey || event.metaKey) && event.key === 'e') {
+                event.preventDefault();
+                toggleEditMode();
+            }
+            
+            // Ctrl/Cmd + F for search (focus search input)
+            if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
+                event.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // Escape to close mobile nav
+            if (event.key === 'Escape') {
+                const nav = document.getElementById('navigation');
+                nav.classList.remove('open');
+            }
+        });
+
+        // Print Functionality
+        function printEbook() {
+            // Expand all sections for printing
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('collapsed');
+            });
+            
+            // Expand all battle cards
+            const battleCards = document.querySelectorAll('.battle-card');
+            battleCards.forEach(card => {
+                card.classList.add('active');
+            });
+            
+            window.print();
+        }
+
+        // Export Functions (for future enhancement)
+        function exportToPDF() {
+            alert('PDF export functionality would be implemented here');
+        }
+
+        function exportToWord() {
+            alert('Word export functionality would be implemented here');
+        }
+
+        // Analytics (placeholder for tracking user interactions)
+        function trackEvent(eventName, eventData) {
+            console.log('Event tracked:', eventName, eventData);
+            // In production, this would send data to analytics service
+        }
+
+        // Track section views
+        function trackSectionView(sectionId) {
+            trackEvent('section_view', { section: sectionId });
+        }
+
+        // Track quiz completion
+        function trackQuizCompletion(score) {
+            trackEvent('quiz_completion', { score: score });
+        }
+
+        // Auto-save functionality for edit mode
+        let autoSaveTimer;
+        function scheduleAutoSave() {
+            clearTimeout(autoSaveTimer);
+            autoSaveTimer = setTimeout(() => {
+                if (editMode) {
+                    saveAllEditableContent();
+                }
+            }, 5000); // Auto-save every 5 seconds
+        }
+
+        function saveAllEditableContent() {
+            const editableElements = document.querySelectorAll('.editable[contenteditable="true"]');
+            const content = {};
+            
+            editableElements.forEach((element, index) => {
+                content[`element_${index}`] = element.innerHTML;
+            });
+            
+            // In production, this would save to localStorage or server
+            localStorage.setItem('dark_ebook_content', JSON.stringify(content));
+            console.log('Auto-saved content');
+        }
+
+        function loadSavedContent() {
+            const savedContent = localStorage.getItem('dark_ebook_content');
+            if (savedContent) {
+                const content = JSON.parse(savedContent);
+                const editableElements = document.querySelectorAll('.editable');
+                
+                editableElements.forEach((element, index) => {
+                    if (content[`element_${index}`]) {
+                        element.innerHTML = content[`element_${index}`];
+                    }
+                });
+            }
+        }
+
+         // Initialize auto-save when edit mode is enabled
+        document.addEventListener('input', function(event) {
+            if (editMode && event.target.classList.contains('editable')) {
+                scheduleAutoSave();
+            }
+        });
+        // Load saved content on page load
+        window.addEventListener('load', loadSavedContent);
+
+        // Export Functions
+        function exportToPDF() {
+            // Create a clean version of the content for export
+            const content = getCleanContent();
+            const printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>D.A.R.K. Leverage Model™ Sales Ebook</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 40px; }
+                        h1, h2, h3 { color: #2c3e50; }
+                        h1 { border-bottom: 3px solid #e94560; padding-bottom: 10px; }
+                        h2 { border-bottom: 2px solid #16213e; padding-bottom: 8px; margin-top: 30px; }
+                        h3 { color: #e94560; margin-top: 25px; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                        th { background-color: #f8f9fa; font-weight: bold; }
+                        .key-takeaway { background: #f8f9fa; padding: 15px; border-left: 4px solid #e94560; margin: 20px 0; }
+                        .coach-tip { background: #e8f4fd; padding: 15px; border-left: 4px solid #0f3460; margin: 20px 0; }
+                        @media print { body { margin: 20px; } }
+                    </style>
+                </head>
+                <body>${content}</body>
+                </html>
+            `);
+            printWindow.document.close();
+            setTimeout(() => {
+                printWindow.print();
+            }, 500);
+        }
+
+        function exportToWord() {
+            const content = getCleanContent();
+            const blob = new Blob([`
+                <!DOCTYPE html>
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word'>
+                <head>
+                    <meta charset='utf-8'>
+                    <title>D.A.R.K. Leverage Model™ Sales Ebook</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; line-height: 1.6; }
+                        h1, h2, h3 { color: #2c3e50; }
+                        h1 { border-bottom: 3px solid #e94560; padding-bottom: 10px; }
+                        h2 { border-bottom: 2px solid #16213e; padding-bottom: 8px; margin-top: 30px; }
+                        h3 { color: #e94560; margin-top: 25px; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+                        th { background-color: #f8f9fa; font-weight: bold; }
+                        .key-takeaway { background: #f8f9fa; padding: 15px; border-left: 4px solid #e94560; margin: 20px 0; }
+                        .coach-tip { background: #e8f4fd; padding: 15px; border-left: 4px solid #0f3460; margin: 20px 0; }
+                    </style>
+                </head>
+                <body>${content}</body>
+                </html>
+            `], { type: 'application/msword' });
+            
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'DARK_Sales_Ebook.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function getCleanContent() {
+            const mainContent = document.querySelector('.main-content').cloneNode(true);
+            
+            // Remove interactive elements
+            const elementsToRemove = mainContent.querySelectorAll('.expand-btn, .add-subsection-form, .remove-btn, .copy-button, .quiz-option');
+            elementsToRemove.forEach(el => el.remove());
+            
+            // Clean up classes and attributes
+            const allElements = mainContent.querySelectorAll('*');
+            allElements.forEach(el => {
+                el.removeAttribute('onclick');
+                el.removeAttribute('class');
+                el.removeAttribute('id');
+            });
+            
+            return mainContent.innerHTML;
+        }
+
+        // Expandable Sections Functions
+        function showAddSubsectionForm(sectionId) {
+            const form = document.getElementById(`add-form-${sectionId}`);
+            form.style.display = 'block';
+        }
+
+        function hideAddSubsectionForm(sectionId) {
+            const form = document.getElementById(`add-form-${sectionId}`);
+            form.style.display = 'none';
+            // Clear form fields
+            document.getElementById(`title-${sectionId}`).value = '';
+            document.getElementById(`content-${sectionId}`).value = '';
+        }
+
+        function addSubsection(sectionId) {
+            const title = document.getElementById(`title-${sectionId}`).value;
+            const content = document.getElementById(`content-${sectionId}`).value;
+            
+            if (!title.trim() || !content.trim()) {
+                alert('Please fill in both title and content for the subsection.');
+                return;
+            }
+            
+            const section = document.getElementById(sectionId);
+            const sectionContent = section.querySelector('.section-content');
+            const subsectionId = `subsection-${sectionId}-${Date.now()}`;
+            
+            const subsectionHTML = `
+                <div class="subsection" id="${subsectionId}">
+                    <div class="subsection-header">
+                        <h4 class="editable">${title}</h4>
+                        <button class="remove-btn" onclick="removeSubsection('${subsectionId}')">Remove</button>
+                    </div>
+                    <div class="editable">${content}</div>
+                </div>
+            `;
+            
+            sectionContent.insertAdjacentHTML('beforeend', subsectionHTML);
+            hideAddSubsectionForm(sectionId);
+            
+            // If in edit mode, make new content editable
+            if (editMode) {
+                const newSubsection = document.getElementById(subsectionId);
+                const editableElements = newSubsection.querySelectorAll('.editable');
+                editableElements.forEach(el => {
+                    el.contentEditable = true;
+                });
+            }
+            
+            // Auto-save the new content
+            scheduleAutoSave();
+        }
+
+        function removeSubsection(subsectionId) {
+            if (confirm('Are you sure you want to remove this subsection?')) {
+                const subsection = document.getElementById(subsectionId);
+                subsection.remove();
+                scheduleAutoSave();
+            }
+        }
+
+        // Enhanced toggle section function
+        function toggleSection(sectionElement) {
+            const content = sectionElement.querySelector('.section-content');
+            const icon = sectionElement.querySelector('.expand-icon');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.textContent = '▼';
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '▶';
+            }
+        }
+    </script>
+</body>
+</html>
+
