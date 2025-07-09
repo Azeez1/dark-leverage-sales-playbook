@@ -552,8 +552,8 @@
             <div class="logo">D.A.R.K. Leverage Model™</div>
             <div class="header-controls">
                 <select id="versionSelect" class="export-btn" onchange="switchVersion(this.value)"></select>
-                <button class="export-btn" onclick="exportToPDF()" title="Export to PDF">
-                    📄 Export PDF
+                <button class="export-btn" onclick="exportToHTML()" title="Export to HTML">
+                    📄 Export HTML
                 </button>
                 <button class="export-btn" onclick="exportToWord()" title="Export to Word">
                     📝 Export Word
@@ -2515,6 +2515,58 @@
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+        }
+
+        function exportToHTML() {
+            const content = getCleanHTMLContent();
+            const date = new Date().toISOString().split('T')[0];
+            const html = `<!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>D.A.R.K. Leverage Model™ Sales Playbook</title>
+                    <style>
+                        body { font-family: Arial, Helvetica, sans-serif; background: #fff; color: #000; margin: 1in; }
+                        h1 { text-align: center; margin-bottom: 40px; }
+                        h2 { page-break-before: always; margin-top: 60px; }
+                        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+                        th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+                        .key-takeaway { background: #f8f9fa; padding: 15px; border-left: 4px solid #e94560; margin: 20px 0; }
+                        .coach-tip { background: #e8f4fd; padding: 15px; border-left: 4px solid #0f3460; margin: 20px 0; }
+                    </style>
+                </head>
+                <body>
+                    <h1>D.A.R.K. Leverage Model™ Sales Playbook</h1>
+                    ${content}
+                </body>
+                </html>`;
+
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `DARK_Sales_Playbook_${date}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function getCleanHTMLContent() {
+            const mainContent = document.querySelector('.main-content').cloneNode(true);
+
+            const elementsToRemove = mainContent.querySelectorAll('.expand-btn, .add-subsection-form, .remove-btn, .copy-button, .quiz-option, .search-container');
+            elementsToRemove.forEach(el => el.remove());
+
+            const sections = mainContent.querySelectorAll('.section-content');
+            sections.forEach(sec => sec.style.display = 'block');
+
+            const allElements = mainContent.querySelectorAll('*');
+            allElements.forEach(el => {
+                el.removeAttribute('onclick');
+            });
+
+            return mainContent.innerHTML;
         }
 
         function getCleanContent() {
