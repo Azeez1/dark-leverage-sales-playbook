@@ -97,6 +97,48 @@
             transition: all 0.3s ease;
         }
 
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: var(--background-card);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            width: 300px;
+            color: var(--text-primary);
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background: var(--background-dark);
+            color: var(--text-primary);
+        }
+
+        .modal-content button {
+            margin-right: 0.5rem;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            margin-bottom: 0.5rem;
+        }
+
         .edit-mode-toggle:hover {
             background: var(--highlight-color);
             transform: translateY(-2px);
@@ -551,19 +593,32 @@
         <div class="header-content">
             <div class="logo">D.A.R.K. Leverage Model™</div>
             <div class="header-controls">
-                <select id="versionSelect" class="export-btn" onchange="switchVersion(this.value)"></select>
+                <select id="versionSelect" class="export-btn" onchange="loadVersion(this.value)"></select>
                 <button class="export-btn" onclick="exportToHTML()" title="Export to HTML">
                     📄 Export HTML
                 </button>
                 <button class="export-btn" onclick="exportToWord()" title="Export to Word">
                     📝 Export Word
                 </button>
+                <button id="saveVersionBtn" class="export-btn" style="display:none;" onclick="showSaveModal()">Save Version</button>
                 <button class="edit-mode-toggle" onclick="toggleEditMode()">
                     <span id="edit-mode-text">Enable Edit Mode</span>
                 </button>
             </div>
         </div>
     </header>
+
+    <div id="saveModal" class="modal">
+        <div class="modal-content">
+            <div id="passwordError" class="error-message" style="display:none;"></div>
+            <input type="password" id="passwordInput" placeholder="Enter password">
+            <input type="text" id="versionDesc" placeholder="Description (optional)">
+            <div style="text-align:right;">
+                <button onclick="attemptSave()">Save</button>
+                <button onclick="closeSaveModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Navigation Toggle for Mobile -->
     <button class="nav-toggle" onclick="toggleNav()">☰</button>
@@ -2124,34 +2179,117 @@
     <script>
         // Global variables
         let editMode = false;
-        let currentVersion = 'v1';
+        let versionData = { currentVersion: 'v1.0', versions: {} };
+        let contentChanged = false;
 
         function initVersions() {
-            const versions = JSON.parse(localStorage.getItem('playbook_versions')) || { v1: document.querySelector('.main-content').innerHTML };
-            if (!versions.v2) {
-                versions.v2 = versions.v1;
+            versionData = JSON.parse(localStorage.getItem('versionData')) || versionData;
+            if (Object.keys(versionData.versions).length === 0) {
+                const now = new Date();
+                versionData.versions['v1.0'] = {
+                    date: now.toISOString().split('T')[0],
+                    time: now.toTimeString().split(' ')[0].substring(0,5),
+                    description: 'Initial version',
+                    content: document.querySelector('.main-content').innerHTML
+                };
+                localStorage.setItem('versionData', JSON.stringify(versionData));
             }
-            localStorage.setItem('playbook_versions', JSON.stringify(versions));
-
-            const select = document.getElementById('versionSelect');
-            Object.keys(versions).forEach(v => {
-                const option = document.createElement('option');
-                option.value = v;
-                option.textContent = v.toUpperCase();
-                select.appendChild(option);
-            });
-
-            currentVersion = localStorage.getItem('current_version') || 'v1';
-            select.value = currentVersion;
+            loadVersion(versionData.currentVersion);
+            updateVersionSelector();
         }
 
-        function switchVersion(version) {
-            const versions = JSON.parse(localStorage.getItem('playbook_versions')) || {};
-            if (versions[version]) {
-                document.querySelector('.main-content').innerHTML = versions[version];
-                currentVersion = version;
-                localStorage.setItem('current_version', version);
+        function updateVersionSelector() {
+            const select = document.getElementById('versionSelect');
+            select.innerHTML = '';
+            const versions = Object.keys(versionData.versions);
+            if (versions.length <= 1) {
+                select.style.display = 'none';
+            } else {
+                select.style.display = 'inline-block';
             }
+            versions.forEach(v => {
+                const option = document.createElement('option');
+                option.value = v;
+                const data = versionData.versions[v];
+                option.textContent = `${v} (${data.date})`;
+                select.appendChild(option);
+            });
+            select.value = versionData.currentVersion;
+        }
+
+        function loadVersion(versionId) {
+            const data = versionData.versions[versionId];
+            if (data) {
+                document.querySelector('.main-content').innerHTML = data.content;
+                versionData.currentVersion = versionId;
+                localStorage.setItem('versionData', JSON.stringify(versionData));
+                updateSaveButton();
+            }
+        }
+
+        function hasContentChanged() {
+            const currentContent = document.querySelector('.main-content').innerHTML;
+            const savedContent = versionData.versions[versionData.currentVersion].content;
+            return currentContent !== savedContent;
+        }
+
+        function updateSaveButton() {
+            const btn = document.getElementById('saveVersionBtn');
+            if (editMode && hasContentChanged()) {
+                btn.style.display = 'inline-block';
+            } else {
+                btn.style.display = 'none';
+            }
+        }
+
+        function showSaveModal() {
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('versionDesc').value = '';
+            document.getElementById('passwordError').style.display = 'none';
+            document.getElementById('saveModal').style.display = 'flex';
+        }
+
+        function closeSaveModal() {
+            document.getElementById('saveModal').style.display = 'none';
+        }
+
+        function attemptSave() {
+            const password = document.getElementById('passwordInput').value;
+            saveVersion(password);
+        }
+
+        function saveVersion(password) {
+            if (password !== 'Infamous403') {
+                const err = document.getElementById('passwordError');
+                err.textContent = 'Incorrect password';
+                err.style.display = 'block';
+                return;
+            }
+            const desc = document.getElementById('versionDesc').value;
+            const content = document.querySelector('.main-content').innerHTML;
+            const newVersion = getNextVersionNumber();
+            const now = new Date();
+            versionData.versions[newVersion] = {
+                date: now.toISOString().split('T')[0],
+                time: now.toTimeString().split(' ')[0].substring(0,5),
+                description: desc,
+                content: content
+            };
+            versionData.currentVersion = newVersion;
+            localStorage.setItem('versionData', JSON.stringify(versionData));
+            closeSaveModal();
+            contentChanged = false;
+            updateVersionSelector();
+            updateSaveButton();
+            alert('Version saved successfully!');
+        }
+
+        function getNextVersionNumber() {
+            const current = versionData.currentVersion || 'v1.0';
+            const parts = current.substring(1).split('.');
+            const major = parseInt(parts[0]) || 1;
+            const minor = parseInt(parts[1]) || 0;
+            return `v${major}.${minor + 1}`;
         }
 
         // Initialize the ebook
@@ -2161,6 +2299,7 @@
             initializeTooltips();
             initializeSmoothScrolling();
             updateActiveNavItem();
+            updateSaveButton();
         });
 
         // Edit Mode Toggle
@@ -2178,6 +2317,7 @@
                 toggleButton.textContent = 'Enable Edit Mode';
                 disableEditableElements();
             }
+            updateSaveButton();
         }
 
         function enableEditableElements() {
@@ -2199,6 +2339,9 @@
         function saveEditableContent(event) {
             // In a real implementation, this would save to localStorage or send to server
             console.log('Content saved:', event.target.textContent);
+
+            contentChanged = true;
+            updateSaveButton();
             
             // Visual feedback
             const element = event.target;
@@ -2626,7 +2769,7 @@
             
             sectionContent.insertAdjacentHTML('beforeend', subsectionHTML);
             hideAddSubsectionForm(sectionId);
-            
+
             // If in edit mode, make new content editable
             if (editMode) {
                 const newSubsection = document.getElementById(subsectionId);
@@ -2635,7 +2778,8 @@
                     el.contentEditable = true;
                 });
             }
-            
+            contentChanged = true;
+            updateSaveButton();
             // Content added
         }
 
@@ -2643,6 +2787,8 @@
             if (confirm('Are you sure you want to remove this subsection?')) {
                 const subsection = document.getElementById(subsectionId);
                 subsection.remove();
+                contentChanged = true;
+                updateSaveButton();
             }
         }
 
